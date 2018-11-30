@@ -69,11 +69,11 @@ namespace Tests
         }
 
         #region TEST DATA
-        [TestCase("" , ExpectedResult = false)]
-        [TestCase(" ", ExpectedResult = true )]
-        [TestCase("a", ExpectedResult = false)]
-        [TestCase("1", ExpectedResult = false)]
-        [TestCase("-", ExpectedResult = false)]
+        [TestCase(""  , ExpectedResult = false)]
+        [TestCase(" " , ExpectedResult = true )]
+        [TestCase("a" , ExpectedResult = false)]
+        [TestCase("1" , ExpectedResult = false)]
+        [TestCase("-" , ExpectedResult = false)]
         [TestCase(null, ExpectedResult = typeof(NullReferenceException))]
         #endregion
         public object IsWhiteSpace(string value)
@@ -81,6 +81,26 @@ namespace Tests
             try
             {
                 return value.IsWhiteSpace();
+            }
+            catch (NullReferenceException exc)
+            {
+                return exc.GetType();
+            }
+        }
+
+        #region TEST DATA
+        [TestCase(""  , ExpectedResult = true )]
+        [TestCase(" " , ExpectedResult = false)]
+        [TestCase("a" , ExpectedResult = true )]
+        [TestCase("1" , ExpectedResult = true )]
+        [TestCase("-" , ExpectedResult = true )]
+        [TestCase(null, ExpectedResult = typeof(NullReferenceException))]
+        #endregion
+        public object IsNotWhiteSpace(string value)
+        {
+            try
+            {
+                return value.IsNotWhiteSpace();
             }
             catch (NullReferenceException exc)
             {

@@ -52,6 +52,12 @@ namespace ExtensionMethods
             }
         }
 
+        /// <summary>
+        /// Checks if string doesn't consist from whit-spaces only. Returns True if string 
+        /// doesn't consist from  whit-spaces only, or False if it does. 
+        /// (Returns true if string is empty.)
+        /// </summary>
+        /// <exception cref="NullReferenceException"></exception>
         public static bool   IsNotWhiteSpace     (this string value) => !value.IsWhiteSpace();
 
         public static bool   HasMaxLength        (this string value, int limit) => (value.Length <= limit);
