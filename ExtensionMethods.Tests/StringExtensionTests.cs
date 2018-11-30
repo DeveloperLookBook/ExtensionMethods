@@ -109,5 +109,24 @@ namespace Tests
                 return exc.GetType();
             }
         }
+
+        #region TEST DATA
+        [TestCase("a"  , ExpectedResult = true )]
+        [TestCase("ab" , ExpectedResult = true )]
+        [TestCase("abc", ExpectedResult = false)]
+        [TestCase(""   , ExpectedResult = true )]
+        [TestCase(null , ExpectedResult = typeof(NullReferenceException))]
+        #endregion
+        public object HasLengthLessOrEqual(string value)
+        {
+            try
+            {
+                return value.HasLengthLessOrEqual(2);
+            }
+            catch (NullReferenceException exc)
+            {
+                return exc.GetType();
+            }
+        }
     }
 }

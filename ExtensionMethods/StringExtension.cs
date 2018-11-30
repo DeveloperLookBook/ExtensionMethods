@@ -45,7 +45,7 @@ namespace ExtensionMethods
             {
                 return (Regex.IsMatch(value, @"\A\s+\z"));
             }
-            catch(ArgumentNullException exc)
+            catch (ArgumentNullException)
             {
                 // Throw is string value is Null.
                 throw new NullReferenceException();
@@ -60,11 +60,24 @@ namespace ExtensionMethods
         /// <exception cref="NullReferenceException"></exception>
         public static bool   IsNotWhiteSpace     (this string value) => !value.IsWhiteSpace();
 
-        public static bool   HasMaxLength        (this string value, int limit) => (value.Length <= limit);
+        /// <summary>
+        /// Checks if string has length less or equal to custom max length limit value.
+        /// Returns True if length is less or equal to custom max length limit value, or 
+        /// False if length is more.
+        /// </summary>
+        /// <param name="limit">Max length limit value.</param>
+        /// <exception cref="NullReferenceException"></exception>
+        public static bool HasLengthLessOrEqual(this string value, int limit)
+        {
+            if (value.IsNull()) throw new NullReferenceException();
+
+            return (value.Length <= limit);
+        }
+
         public static bool   HasMinLength        (this string value, int limit) => (value.Length >= limit);
         public static bool   HasLengthLessThan   (this string value, int limit) => (value.Length <  limit);
         public static bool   HasLengthMoreThan   (this string value, int limit) => (value.Length >  limit);
-        public static bool   HasLengthInRange    (this string value, int min, int max) => value.HasMinLength(min) && value.HasMaxLength(max);
+        public static bool   HasLengthInRange    (this string value, int min, int max) => value.HasMinLength(min) && value.HasLengthLessOrEqual(max);
 
         public static bool   IsMatch             (this string value, string pattern, RegexOptions options = RegexOptions.Multiline)
         {
