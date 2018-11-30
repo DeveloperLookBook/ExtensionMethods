@@ -94,6 +94,8 @@ namespace Tests
         [TestCase("a" , ExpectedResult = true )]
         [TestCase("1" , ExpectedResult = true )]
         [TestCase("-" , ExpectedResult = true )]
+        [TestCase("\n", ExpectedResult = false)]
+        [TestCase("\t", ExpectedResult = false)]
         [TestCase(null, ExpectedResult = typeof(NullReferenceException))]
         #endregion
         public object IsNotWhiteSpace(string value)
