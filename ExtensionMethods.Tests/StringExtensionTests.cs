@@ -58,7 +58,34 @@ namespace Tests
         #endregion
         public object IsNotEmpty(string value)
         {
-            return value.IsNotEmpty();
+            try
+            {
+                return value.IsNotEmpty();
+            }
+            catch (NullReferenceException exc)
+            {
+                return exc.GetType();
+            }
+        }
+
+        #region TEST DATA
+        [TestCase("" , ExpectedResult = false)]
+        [TestCase(" ", ExpectedResult = true )]
+        [TestCase("a", ExpectedResult = false)]
+        [TestCase("1", ExpectedResult = false)]
+        [TestCase("-", ExpectedResult = false)]
+        [TestCase(null, ExpectedResult = typeof(NullReferenceException))]
+        #endregion
+        public object IsWhiteSpace(string value)
+        {
+            try
+            {
+                return value.IsWhiteSpace();
+            }
+            catch (NullReferenceException exc)
+            {
+                return exc.GetType();
+            }
         }
     }
 }

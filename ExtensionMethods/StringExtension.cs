@@ -11,7 +11,8 @@ namespace ExtensionMethods
         public static bool   IsNull              (this string value) => (value is null);
 
         /// <summary>
-        /// Checks if string is not Null. Returns True if string is not Null, or False if it is Null.
+        /// Checks if string is not Null. Returns True if string is not Null, or False if it 
+        /// is Null.
         /// </summary>
         public static bool   IsNotNull           (this string value) => !value.IsNull();
 
@@ -27,13 +28,30 @@ namespace ExtensionMethods
         }
 
         /// <summary>
-        /// Checks if string is not Empty. Returns True if string is not Empty, or False if it is Empty.
+        /// Checks if string is not Empty. Returns True if string is not Empty, or False if it 
+        /// is Empty.
         /// </summary>
         /// <exception cref="NullReferenceException"></exception>
         public static bool   IsNotEmpty          (this string value) => !value.IsEmpty();
 
+        /// <summary>
+        /// Checks if string consist from whit-spaces only. Returns True if string consist from 
+        /// whit-spaces only, or False if it's not. (Returns false if string is empty.)
+        /// </summary>
+        /// <exception cref="NullReferenceException"></exception>
+        public static bool IsWhiteSpace(this string value)
+        {
+            try
+            {
+                return (Regex.IsMatch(value, @"\A\s+\z"));
+            }
+            catch(ArgumentNullException exc)
+            {
+                // Throw is string value is Null.
+                throw new NullReferenceException();
+            }
+        }
 
-        public static bool   IsWhiteSpace        (this string value) => (Regex.IsMatch(value, @"\A\s*\z"));
         public static bool   IsNotWhiteSpace     (this string value) => !value.IsWhiteSpace();
 
         public static bool   HasMaxLength        (this string value, int limit) => (value.Length <= limit);
