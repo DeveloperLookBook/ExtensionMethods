@@ -1,5 +1,6 @@
 using ExtensionMethods;
 using NUnit.Framework;
+using System;
 
 namespace Tests
 {
@@ -27,6 +28,25 @@ namespace Tests
         public bool IsNotNull(string value)
         {
             return value.IsNotNull();
+        }
+
+        #region TEST DATA
+        [TestCase(""  , ExpectedResult = true )]
+        [TestCase(" " , ExpectedResult = false)]
+        [TestCase("1" , ExpectedResult = false)]
+        [TestCase("a" , ExpectedResult = false)]
+        [TestCase(null, ExpectedResult = typeof(NullReferenceException))]
+        #endregion
+        public object IsEmpty(string value)
+        {
+            try
+            {
+                return value.IsEmpty();
+            }
+            catch(NullReferenceException exc)
+            {
+                return exc.GetType();
+            }
         }
     }
 }
