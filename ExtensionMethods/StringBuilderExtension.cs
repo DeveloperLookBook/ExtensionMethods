@@ -20,18 +20,17 @@ namespace ExtensionMethods
         public static bool   HasLengthMoreThan   (this StringBuilder value, int limit) => (value.Length >  limit);
         public static bool   HasLengthInRange    (this StringBuilder value, int min, int max) => value.HasMinLength(min) && value.HasMaxLength(max);
 
-        public static bool   IsMatch             (this StringBuilder value, string pattern, RegexOptions options)
+        public static bool   IsMatch             (this StringBuilder value, string pattern, RegexOptions options = RegexOptions.Multiline)
         {
             if (value.IsNull()  ) throw new ArgumentNullException(nameof(value  ));
             if (pattern.IsNull()) throw new ArgumentNullException(nameof(pattern));
 
-            var input   = value;
+            var input   = value.ToString();
             var regex   = new Regex(pattern, options);
-            var isMatch = regex.IsMatch(input.ToString());
+            var isMatch = regex.IsMatch(input);
 
             return isMatch;
         }
-        public static bool   IsMatch             (this StringBuilder value, string pattern) => IsMatch(value, pattern, RegexOptions.Multiline);
 
         public static bool   TrimedLeft          (this StringBuilder value)
         {
@@ -43,7 +42,7 @@ namespace ExtensionMethods
             }
             else
             {
-                var input = value;
+                var input = value.ToString();
                 var patternt = @"\A[\P{Z}].*\z";
                 var options = RegexOptions.Multiline;
                 var regex = new Regex(patternt, options);
@@ -63,7 +62,7 @@ namespace ExtensionMethods
             }
             else
             {
-                var input    = value;
+                var input    = value.ToString();
                 var patternt = @"\A.*?[\P{Z}]\z";
                 var options  = RegexOptions.Multiline;
                 var regex    = new Regex(patternt, options);
