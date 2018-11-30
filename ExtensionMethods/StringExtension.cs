@@ -74,7 +74,8 @@ namespace ExtensionMethods
                              
                              
         public static bool   SentenceCased       (this string value) => value.IsMatch(@"\A[\p{Lu}].*\z");                             
-                             
+                      
+        
         public static bool   HasNoLetters        (this string value) => !value.IsMatch(@"\p{L}" );
         public static bool   HasNoMarks          (this string value) => !value.IsMatch(@"\p{M}" );
         public static bool   HasNoNumbers        (this string value) => !value.IsMatch(@"\p{N}" );
