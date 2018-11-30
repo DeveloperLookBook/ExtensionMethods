@@ -74,10 +74,23 @@ namespace ExtensionMethods
             return (value.Length <= limit);
         }
 
-        public static bool   HasMinLength        (this string value, int limit) => (value.Length >= limit);
+        /// <summary>
+        /// Checks if string has length more or equal to custom min length limit value.
+        /// Returns True if length is more or equal to custom min length limit value, or 
+        /// False if length is less.
+        /// </summary>
+        /// <param name="limit">Min length limit value.</param>
+        /// <exception cref="NullReferenceException"></exception>
+        public static bool   HasLengthMoreOrEqual(this string value, int limit)
+        {
+            if (value.IsNull()) throw new NullReferenceException();
+
+            return (value.Length >= limit);
+        }
+
         public static bool   HasLengthLessThan   (this string value, int limit) => (value.Length <  limit);
         public static bool   HasLengthMoreThan   (this string value, int limit) => (value.Length >  limit);
-        public static bool   HasLengthInRange    (this string value, int min, int max) => value.HasMinLength(min) && value.HasLengthLessOrEqual(max);
+        public static bool   HasLengthInRange    (this string value, int min, int max) => value.HasLengthMoreOrEqual(min) && value.HasLengthLessOrEqual(max);
 
         public static bool   IsMatch             (this string value, string pattern, RegexOptions options = RegexOptions.Multiline)
         {
