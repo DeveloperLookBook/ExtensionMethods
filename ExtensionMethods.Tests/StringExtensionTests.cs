@@ -16,5 +16,17 @@ namespace Tests
         {
             return value.IsNull();
         }
+
+        #region TEST DATA
+        [TestCase(""          , ExpectedResult = true )]
+        [TestCase(" "         , ExpectedResult = true )]
+        [TestCase("0123456789", ExpectedResult = true )]
+        [TestCase("test text" , ExpectedResult = true )]
+        [TestCase(null        , ExpectedResult = false)]
+        #endregion
+        public bool IsNotNull(string value)
+        {
+            return value.IsNotNull();
+        }
     }
 }
