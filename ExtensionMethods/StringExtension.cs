@@ -7,7 +7,13 @@ namespace ExtensionMethods
     {
         public static bool   IsNull              (this string value) => (value is null);
         public static bool   IsNotNull           (this string value) => !value.IsNull();
-        public static bool   IsEmpty             (this string value) => (value == String.Empty);
+        public static bool   IsEmpty(this string value)
+        {
+            if (value.IsNull()) throw new ArgumentNullException(value);
+
+            return (value == String.Empty);
+        }
+
         public static bool   IsNotEmpty          (this string value) => !value.IsNotEmpty();
         public static bool   IsWhiteSpace        (this string value) => (Regex.IsMatch(value, @"\A\s*\z"));
         public static bool   IsNotWhiteSpace     (this string value) => !value.IsWhiteSpace();
