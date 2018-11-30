@@ -48,5 +48,17 @@ namespace Tests
                 return exc.GetType();
             }
         }
+
+        #region TEST DATA
+        [TestCase(""  , ExpectedResult = false)]
+        [TestCase(" " , ExpectedResult = true )]
+        [TestCase("1" , ExpectedResult = true )]
+        [TestCase("a" , ExpectedResult = true )]
+        [TestCase(null, ExpectedResult = typeof(NullReferenceException))]
+        #endregion
+        public object IsNotEmpty(string value)
+        {
+            return value.IsNotEmpty();
+        }
     }
 }

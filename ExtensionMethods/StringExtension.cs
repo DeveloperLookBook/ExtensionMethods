@@ -5,16 +5,34 @@ namespace ExtensionMethods
 {
     public static class StringExtension
     {
+        /// <summary>
+        /// Checks if string is Null. Returns True if string is Null, or False if not
+        /// </summary>
         public static bool   IsNull              (this string value) => (value is null);
+
+        /// <summary>
+        /// Checks if string is not Null. Returns True if string is not Null, or False if it is Null.
+        /// </summary>
         public static bool   IsNotNull           (this string value) => !value.IsNull();
-        public static bool   IsEmpty(this string value)
+
+        /// <summary>
+        /// Checks if string is Empty. Returns True if string is Empty, or False if it is not.
+        /// </summary>
+        /// <exception cref="NullReferenceException"></exception>
+        public static bool   IsEmpty             (this string value)
         {
-            if (value.IsNull()) throw new ArgumentNullException(value);
+            if (value.IsNull()) throw new NullReferenceException();
 
             return (value == String.Empty);
         }
 
-        public static bool   IsNotEmpty          (this string value) => !value.IsNotEmpty();
+        /// <summary>
+        /// Checks if string is not Empty. Returns True if string is not Empty, or False if it is Empty.
+        /// </summary>
+        /// <exception cref="NullReferenceException"></exception>
+        public static bool   IsNotEmpty          (this string value) => !value.IsEmpty();
+
+
         public static bool   IsWhiteSpace        (this string value) => (Regex.IsMatch(value, @"\A\s*\z"));
         public static bool   IsNotWhiteSpace     (this string value) => !value.IsWhiteSpace();
 
