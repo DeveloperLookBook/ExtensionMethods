@@ -531,5 +531,25 @@ namespace Tests
                 return typeof(NullReferenceException);
             }
         }
+
+        #region TEST DATA
+        [TestCase("     ", 2, ExpectedResult = false)]
+        [TestCase(""     , 2, ExpectedResult = false)]
+        [TestCase("a"    , 2, ExpectedResult = false)]
+        [TestCase("a b"  , 2, ExpectedResult = true )]
+        [TestCase("a b c", 2, ExpectedResult = true )]
+        [TestCase(null   , 2, ExpectedResult = typeof(NullReferenceException))]
+        #endregion
+        public object IsWordCountMoreOrEqual(string value, int limit)
+        {
+            try
+            {
+                return value.IsWordCountMoreOrEqual(limit);
+            }
+            catch (NullReferenceException)
+            {
+                return typeof(NullReferenceException);
+            }
+        }
     }
 }
