@@ -341,6 +341,19 @@ namespace ExtensionMethods
             return (value.WordCount() >= limit);
         }
 
+        /// <summary>
+        /// Checks if word count is equal to custom limit value. 
+        /// </summary>
+        /// <param name="limit">Word count limit.</param>
+        /// <returns>Returns True if word count is equal to custom limit value, 
+        /// if it's not, returns False.</returns>
+        /// <exception cref="NullReferenceException"></exception>
+        public static bool IsWordCountEqual(this string value, int limit)
+        {
+            if (value.IsNull()) throw new NullReferenceException(nameof(value));
+
+            return (value.WordCount() == limit);
+        }
 
 
         /// <summary>
