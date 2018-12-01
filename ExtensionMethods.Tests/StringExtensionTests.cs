@@ -295,11 +295,11 @@ namespace Tests
         [TestCase(" -.!" , ExpectedResult = false)]
         [TestCase(null   , ExpectedResult = typeof(NullReferenceException))]
         #endregion
-        public object TrimedLeft(string value)
+        public object IsTrimedLeft(string value)
         {
             try
             {
-                return value.TrimedLeft();
+                return value.IsTrimedLeft();
             }
             catch (NullReferenceException exc)
             {
@@ -321,11 +321,43 @@ namespace Tests
         [TestCase("-.! " , ExpectedResult = false)]
         [TestCase(null   , ExpectedResult = typeof(NullReferenceException))]
         #endregion
-        public object TrimedRight(string value)
+        public object IsTrimedRight(string value)
         {
             try
             {
-                return value.TrimedRight();
+                return value.IsTrimedRight();
+            }
+            catch (NullReferenceException exc)
+            {
+                return exc.GetType();
+            }
+        }
+
+        #region TEST DATA
+        [TestCase(""     , ExpectedResult = true )]
+        [TestCase("abc"  , ExpectedResult = true )]
+        [TestCase("a b c", ExpectedResult = true )]
+        [TestCase("123"  , ExpectedResult = true )]
+        [TestCase("1 2 3", ExpectedResult = true )]
+        [TestCase("-.!"  , ExpectedResult = true )]
+        [TestCase("- . !", ExpectedResult = true )]
+        [TestCase("   "  , ExpectedResult = false)]
+        [TestCase("abc " , ExpectedResult = false)]
+        [TestCase("123 " , ExpectedResult = false)]
+        [TestCase("-.! " , ExpectedResult = false)]
+        [TestCase(" abc" , ExpectedResult = false)]
+        [TestCase(" 123" , ExpectedResult = false)]
+        [TestCase(" -.!" , ExpectedResult = false)]
+        [TestCase(" abc ", ExpectedResult = false)]
+        [TestCase(" 123 ", ExpectedResult = false)]
+        [TestCase(" -.! ", ExpectedResult = false)]
+        [TestCase(null   , ExpectedResult = typeof(NullReferenceException))]
+        #endregion
+        public object IsTrimed(string value)
+        {
+            try
+            {
+                return value.IsTrimed();
             }
             catch (NullReferenceException exc)
             {

@@ -148,7 +148,8 @@ namespace ExtensionMethods
         /// Checks if string is trimmed from the left side. Returns True if string is trimmed from 
         /// the left side, or False, if it's not.
         /// </summary>
-        public static bool   TrimedLeft          (this string value)
+        /// <exception cref="NullReferenceException"></exception>
+        public static bool   IsTrimedLeft          (this string value)
         {
             if (value.IsNull()) throw new NullReferenceException();
 
@@ -175,7 +176,8 @@ namespace ExtensionMethods
         /// Checks if string is trimmed from the right side. Returns True if string is trimmed from 
         /// the right side, or False, if it's not.
         /// </summary>
-        public static bool   TrimedRight         (this string value)
+        /// <exception cref="NullReferenceException"></exception>
+        public static bool   IsTrimedRight         (this string value)
         {
             if (value.IsNull()) throw new NullReferenceException();
 
@@ -197,7 +199,13 @@ namespace ExtensionMethods
 
             return isTrimmedRight;
         }
-        public static bool   Trimed              (this string value) => (value.TrimedLeft() && value.TrimedRight());
+
+        /// <summary>
+        /// Checks if string trimmed from the left and right side. Returns True if string is trimmed
+        /// from both sides, or False if it's not.
+        /// </summary>
+        /// <exception cref="NullReferenceException"></exception>
+        public static bool   IsTrimed              (this string value) => (value.IsTrimedLeft() && value.IsTrimedRight());
                              
                              
         public static bool   SentenceCased       (this string value) => value.IsMatch(@"\A[\p{Lu}].*\z");                             
