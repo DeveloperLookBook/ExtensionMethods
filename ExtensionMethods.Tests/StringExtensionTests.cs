@@ -364,5 +364,48 @@ namespace Tests
                 return exc.GetType();
             }
         }
+
+        #region TEST DATA
+        [TestCase(""   , ExpectedResult = true )]
+        [TestCase("ABC", ExpectedResult = true )]
+        [TestCase("123", ExpectedResult = true )]
+        [TestCase(",.!", ExpectedResult = true )]
+        [TestCase("   ", ExpectedResult = true )]
+        [TestCase("A12", ExpectedResult = true )]
+        [TestCase("1A2", ExpectedResult = true )]
+        [TestCase("12A", ExpectedResult = true )]
+        [TestCase("A!!", ExpectedResult = true )]
+        [TestCase("!A!", ExpectedResult = true )]
+        [TestCase("!!A", ExpectedResult = true )]
+        [TestCase("A  ", ExpectedResult = true )]
+        [TestCase(" A ", ExpectedResult = true )]
+        [TestCase("  A", ExpectedResult = true )]
+        [TestCase("abc", ExpectedResult = false)]
+        [TestCase("Abc", ExpectedResult = false)]
+        [TestCase("aBc", ExpectedResult = false)]
+        [TestCase("abC", ExpectedResult = false)]
+        [TestCase("a12", ExpectedResult = false)]
+        [TestCase("1a2", ExpectedResult = false)]
+        [TestCase("12a", ExpectedResult = false)]
+        [TestCase("a!!", ExpectedResult = false)]
+        [TestCase("!a!", ExpectedResult = false)]
+        [TestCase("!!a", ExpectedResult = false)]
+        [TestCase("!!a", ExpectedResult = false)]
+        [TestCase("a  ", ExpectedResult = false)]
+        [TestCase(" a ", ExpectedResult = false)]
+        [TestCase("  a", ExpectedResult = false)]
+        [TestCase(null , ExpectedResult = typeof(NullReferenceException))]
+        #endregion
+        public object IsUppercase(string value)
+        {
+            try
+            {
+                return value.IsUppercase();
+            }
+            catch (NullReferenceException exc)
+            {
+                return exc.GetType();
+            }
+        }
     }
 }

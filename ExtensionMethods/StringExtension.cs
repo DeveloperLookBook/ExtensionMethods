@@ -201,13 +201,29 @@ namespace ExtensionMethods
         }
 
         /// <summary>
-        /// Checks if string trimmed from the left and right side. Returns True if string is trimmed
-        /// from both sides, or False if it's not.
+        /// Checks if string trimmed from the left and right side. Returns True if string 
+        /// is trimmed from both sides, or False if it's not.
         /// </summary>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   IsTrimed              (this string value) => (value.IsTrimedLeft() && value.IsTrimedRight());
-                             
-                             
+        public static bool   IsTrimed            (this string value) => (value.IsTrimedLeft() && value.IsTrimedRight());
+
+        /// <summary>
+        /// Checks if all letters that are present in the string have uppercase format. 
+        /// Returns true if all letters that are present in the string have uppercase 
+        /// format, or false if they aren't. (Returns True if string is empty)
+        /// </summary>
+        /// <exception cref="NullReferenceException"></exception>
+        public static bool   IsUppercase        (this string value)
+        {
+            if (value.IsNull()) { throw new NullReferenceException(nameof(value)); }
+
+            var input       = value;
+            var options     = RegexOptions.Multiline;
+            var isUppercase = Regex.IsMatch(input, @"\A[\p{Lu}\p{M}\p{N}\p{P}\p{S}\p{Z}\p{C}]*\z", options);
+
+            return isUppercase;
+        }
+            
         public static bool   SentenceCased       (this string value) => value.IsMatch(@"\A[\p{Lu}].*\z");                             
                       
         
