@@ -145,8 +145,8 @@ namespace ExtensionMethods
         }
 
         /// <summary>
-        /// Checks if string is trimmed from left side. Returns True if string trimmed from 
-        /// left side, or False, if it's not.
+        /// Checks if string is trimmed from the left side. Returns True if string is trimmed from 
+        /// the left side, or False, if it's not.
         /// </summary>
         public static bool   TrimedLeft          (this string value)
         {
@@ -169,9 +169,16 @@ namespace ExtensionMethods
             }
 
             return isTrimmedLeft;
-        }                                             
+        }
+
+        /// <summary>
+        /// Checks if string is trimmed from the right side. Returns True if string is trimmed from 
+        /// the right side, or False, if it's not.
+        /// </summary>
         public static bool   TrimedRight         (this string value)
         {
+            if (value.IsNull()) throw new NullReferenceException();
+
             var isTrimmedRight = false;
 
             if (value.IsEmpty())

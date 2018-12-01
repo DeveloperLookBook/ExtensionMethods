@@ -306,5 +306,31 @@ namespace Tests
                 return exc.GetType();
             }
         }
+
+        #region TEST DATA
+        [TestCase(""     , ExpectedResult = true )]
+        [TestCase("abc"  , ExpectedResult = true )]
+        [TestCase("a b c", ExpectedResult = true )]
+        [TestCase("123"  , ExpectedResult = true )]
+        [TestCase("1 2 3", ExpectedResult = true )]
+        [TestCase("-.!"  , ExpectedResult = true )]
+        [TestCase("- . !", ExpectedResult = true )]
+        [TestCase("   "  , ExpectedResult = false)]
+        [TestCase("abc " , ExpectedResult = false)]
+        [TestCase("123 " , ExpectedResult = false)]
+        [TestCase("-.! " , ExpectedResult = false)]
+        [TestCase(null   , ExpectedResult = typeof(NullReferenceException))]
+        #endregion
+        public object TrimedRight(string value)
+        {
+            try
+            {
+                return value.TrimedRight();
+            }
+            catch (NullReferenceException exc)
+            {
+                return exc.GetType();
+            }
+        }
     }
 }
