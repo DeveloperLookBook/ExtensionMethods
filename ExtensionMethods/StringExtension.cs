@@ -97,6 +97,18 @@ namespace ExtensionMethods
         public static bool   HasLengthMore(this string value, int limit) => (value.Length > limit);
 
         /// <summary>
+        /// Checks if string length is equal to custom value.
+        /// </summary>
+        /// <param name="number">Custom value.</param>
+        /// <returns>Returns True if string length is equal to custom value.</returns>
+        public static bool   HasLengthEqual(this string value, int number)
+        {
+            if (value.IsNull()) throw new NullReferenceException();
+
+            return (value.Length == number);
+        }
+
+        /// <summary>
         /// Checks if string length is in the specified range. Returns True if length 
         /// is in the range, or False, if it is out of the range.
         /// </summary>

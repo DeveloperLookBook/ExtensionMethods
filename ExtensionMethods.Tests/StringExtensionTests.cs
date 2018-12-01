@@ -112,17 +112,18 @@ namespace Tests
         }
 
         #region TEST DATA
-        [TestCase("a"  , ExpectedResult = true )]
-        [TestCase("ab" , ExpectedResult = true )]
-        [TestCase("abc", ExpectedResult = false)]
-        [TestCase(""   , ExpectedResult = true )]
-        [TestCase(null , ExpectedResult = typeof(NullReferenceException))]
+        [TestCase(""   , 2, ExpectedResult = true )]
+        [TestCase(" "  , 2, ExpectedResult = true )]
+        [TestCase("a"  , 2, ExpectedResult = true )]
+        [TestCase("ab" , 2, ExpectedResult = true )]
+        [TestCase("abc", 2, ExpectedResult = false)]
+        [TestCase(null , 2, ExpectedResult = typeof(NullReferenceException))]
         #endregion
-        public object HasLengthLessOrEqual(string value)
+        public object HasLengthLessOrEqual(string value, int limit)
         {
             try
             {
-                return value.HasLengthLessOrEqual(2);
+                return value.HasLengthLessOrEqual(limit);
             }
             catch (NullReferenceException exc)
             {
@@ -131,17 +132,18 @@ namespace Tests
         }
 
         #region TEST DATA
-        [TestCase("a"  , ExpectedResult = false)]
-        [TestCase("ab" , ExpectedResult = true )]
-        [TestCase("abc", ExpectedResult = true )]
-        [TestCase(""   , ExpectedResult = false)]
-        [TestCase(null , ExpectedResult = typeof(NullReferenceException))]
+        [TestCase(""   , 2, ExpectedResult = false)]
+        [TestCase(" "  , 2, ExpectedResult = false)]
+        [TestCase("a"  , 2, ExpectedResult = false)]
+        [TestCase("ab" , 2, ExpectedResult = true )]
+        [TestCase("abc", 2, ExpectedResult = true )]
+        [TestCase(null , 2, ExpectedResult = typeof(NullReferenceException))]
         #endregion
-        public object HasLengthMoreOrEqual(string value)
+        public object HasLengthMoreOrEqual(string value, int limit)
         {
             try
             {
-                return value.HasLengthMoreOrEqual(2);
+                return value.HasLengthMoreOrEqual(limit);
             }
             catch (NullReferenceException exc)
             {
@@ -150,17 +152,58 @@ namespace Tests
         }
 
         #region TEST DATA
-        [TestCase("a"  , ExpectedResult = true )]
-        [TestCase("ab" , ExpectedResult = true )]
-        [TestCase("abc", ExpectedResult = false)]
-        [TestCase(""   , ExpectedResult = true )]
-        [TestCase(null , ExpectedResult = typeof(NullReferenceException))]
+        [TestCase(""   , 3, ExpectedResult = true )]
+        [TestCase(" "  , 3, ExpectedResult = true )]
+        [TestCase("a"  , 3, ExpectedResult = true )]
+        [TestCase("ab" , 3, ExpectedResult = true )]
+        [TestCase("abc", 3, ExpectedResult = false)]
+        [TestCase(null , 3, ExpectedResult = typeof(NullReferenceException))]
         #endregion
-        public object HasLengthLess(string value)
+        public object HasLengthLess(string value, int limit)
         {
             try
             {
-                return value.HasLengthLess(3);
+                return value.HasLengthLess(limit);
+            }
+            catch (NullReferenceException exc)
+            {
+                return exc.GetType();
+            }
+        }
+
+        #region TEST DATA
+        [TestCase(""   , 2, ExpectedResult = false)]
+        [TestCase(" "  , 2, ExpectedResult = false)]
+        [TestCase("a"  , 2, ExpectedResult = false)]
+        [TestCase("ab" , 2, ExpectedResult = false)]
+        [TestCase("abc", 2, ExpectedResult = true )]
+        [TestCase(null , 2, ExpectedResult = typeof(NullReferenceException))]
+        #endregion
+        public object HasLengthMore(string value, int limit)
+        {
+            try
+            {
+                return value.HasLengthMore(limit);
+            }
+            catch (NullReferenceException exc)
+            {
+                return exc.GetType();
+            }
+        }
+
+        #region TEST DATA
+        [TestCase(""   , 2, ExpectedResult = false)]
+        [TestCase(" "  , 2, ExpectedResult = false)]
+        [TestCase("a"  , 2, ExpectedResult = false)]
+        [TestCase("ab" , 2, ExpectedResult = true )]
+        [TestCase("abc", 2, ExpectedResult = false)]
+        [TestCase(null , 2, ExpectedResult = typeof(NullReferenceException))]
+        #endregion
+        public object HasLengthEqual(string value, int limit)
+        {
+            try
+            {
+                return value.HasLengthEqual(limit);
             }
             catch (NullReferenceException exc)
             {
