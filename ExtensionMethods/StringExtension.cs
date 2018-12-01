@@ -67,12 +67,7 @@ namespace ExtensionMethods
         /// </summary>
         /// <param name="limit">Max length limit value.</param>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   HasLengthLessOrEqual(this string value, int limit)
-        {
-            if (value.IsNull()) throw new NullReferenceException();
-
-            return (value.Length <= limit);
-        }
+        public static bool   HasLengthLessOrEqual(this string value, int limit) => (value.Length <= limit);
 
         /// <summary>
         /// Checks if string has length more then or equal to custom min length limit value.
@@ -81,12 +76,7 @@ namespace ExtensionMethods
         /// </summary>
         /// <param name="limit">Min length limit value.</param>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   HasLengthMoreOrEqual(this string value, int limit)
-        {
-            if (value.IsNull()) throw new NullReferenceException();
-
-            return (value.Length >= limit);
-        }
+        public static bool   HasLengthMoreOrEqual(this string value, int limit) => (value.Length >= limit);
 
         /// <summary>
         /// Checks if string has length less than custom min length limit value.
@@ -95,20 +85,36 @@ namespace ExtensionMethods
         /// </summary>
         /// <param name="limit">Max length limit value.</param>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   HasLengthLess(this string value, int limit)
-        {
-            if (value.IsNull()) throw new NullReferenceException();
+        public static bool   HasLengthLess(this string value, int limit) => (value.Length < limit);
 
-            return (value.Length < limit);
-        }
+        /// <summary>
+        /// Checks if string has length less than custom min length limit value.
+        /// Returns True if length is less than custom min length limit value, or 
+        /// False if length is more or equal to custom limit value.
+        /// </summary>
+        /// <param name="limit">Max length limit value.</param>
+        /// <exception cref="NullReferenceException"></exception>
+        public static bool   HasLengthMore(this string value, int limit) => (value.Length > limit);
 
-        public static bool   HasLengthMore       (this string value, int limit) => (value.Length >  limit);
+        /// <summary>
+        /// Checks if string length is in the specified range. Returns True if length 
+        /// is in the range, or False, if it is out of the range.
+        /// </summary>
+        /// <param name="min">Min length limit value.</param>
+        /// <param name="max">Max length limit value.</param>
         public static bool   HasLengthInRange    (this string value, int min, int max) => value.HasLengthMoreOrEqual(min) && value.HasLengthLessOrEqual(max);
 
+        /// <summary>
+        /// Checks if string matches pattern. Returns True if string matches pattern, or False, if it's not.
+        /// </summary>
+        /// <param name="pattern">Pattern of the regular expression.</param>
+        /// <param name="options">Regular expression options.</param>
+        /// <exception cref="NullReferenceException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
         public static bool   IsMatch             (this string value, string pattern, RegexOptions options = RegexOptions.Multiline)
         {
-            if (value.IsNull()  ) throw new ArgumentNullException(nameof(value  ));
-            if (pattern.IsNull()) throw new ArgumentNullException(nameof(pattern));
+            if (value.IsNull()  ) throw new NullReferenceException();
+            if (pattern.IsNull()) throw new ArgumentNullException (nameof(pattern));
 
             var input   = value;
             var regex   = new Regex(pattern, options);

@@ -1,6 +1,7 @@
 using ExtensionMethods;
 using NUnit.Framework;
 using System;
+using System.Text.RegularExpressions;
 
 namespace Tests
 {
@@ -148,7 +149,6 @@ namespace Tests
             }
         }
 
-
         #region TEST DATA
         [TestCase("a"  , ExpectedResult = true )]
         [TestCase("ab" , ExpectedResult = true )]
@@ -163,6 +163,67 @@ namespace Tests
                 return value.HasLengthLess(3);
             }
             catch (NullReferenceException exc)
+            {
+                return exc.GetType();
+            }
+        }
+
+        #region TEST DATA
+        [TestCase("a"  , 2, 3, ExpectedResult = false)]
+        [TestCase("ab" , 2, 3, ExpectedResult = true )]
+        [TestCase("abc", 2, 3, ExpectedResult = true )]
+        [TestCase(""   , 2, 3, ExpectedResult = false)]
+        [TestCase(null , 2, 3, ExpectedResult = typeof(NullReferenceException))]
+        #endregion
+        public object HasLengthInRange(string value, int min, int max)
+        {
+            try
+            {
+                return value.HasLengthInRange(min, max);
+            }
+            catch (NullReferenceException exc)
+            {
+                return exc.GetType();
+            }
+        }
+
+        #region TEST DATA
+        [TestCase("abc", "abc", ExpectedResult = true )]
+        [TestCase("123", "123", ExpectedResult = true )]
+        [TestCase("-.,", "-.,", ExpectedResult = true )]
+        [TestCase("abc", "123", ExpectedResult = false)]
+        [TestCase("123", "abc", ExpectedResult = false)]
+        [TestCase(""   , "abc", ExpectedResult = false)]
+        [TestCase(""   , "123", ExpectedResult = false)]
+        [TestCase(""   , "-.,", ExpectedResult = false)]
+        [TestCase(null , "abc", ExpectedResult = typeof(NullReferenceException))]
+        [TestCase(null , null , ExpectedResult = typeof(NullReferenceException))]
+        [TestCase(""   , null , ExpectedResult = typeof(ArgumentNullException ))]
+
+        [TestCase("abc", "abc", RegexOptions.Multiline, ExpectedResult = true )]
+        [TestCase("123", "123", RegexOptions.Multiline, ExpectedResult = true )]
+        [TestCase("-.,", "-.,", RegexOptions.Multiline, ExpectedResult = true )]
+        [TestCase("-.,", "-.,", RegexOptions.Multiline, ExpectedResult = true )]
+        [TestCase("abc", "123", RegexOptions.Multiline, ExpectedResult = false)]
+        [TestCase("123", "abc", RegexOptions.Multiline, ExpectedResult = false)]
+        [TestCase(""   , "abc", RegexOptions.Multiline, ExpectedResult = false)]
+        [TestCase(""   , "123", RegexOptions.Multiline, ExpectedResult = false)]
+        [TestCase(""   , "-.,", RegexOptions.Multiline, ExpectedResult = false)]
+        [TestCase(null , "abc", RegexOptions.Multiline, ExpectedResult = typeof(NullReferenceException))]
+        [TestCase(null , null , RegexOptions.Multiline, ExpectedResult = typeof(NullReferenceException))]
+        [TestCase(""   , null , RegexOptions.Multiline, ExpectedResult = typeof(ArgumentNullException ))]
+        #endregion
+        public object IsMatch(string value, string pattern, RegexOptions options = RegexOptions.Multiline)
+        {
+            try
+            {
+                return value.IsMatch(pattern, options);
+            }
+            catch (NullReferenceException exc)
+            {
+                return exc.GetType();
+            }
+            catch(ArgumentNullException exc)
             {
                 return exc.GetType();
             }
