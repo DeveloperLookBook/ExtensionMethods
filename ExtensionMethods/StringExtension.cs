@@ -292,7 +292,7 @@ namespace ExtensionMethods
         /// <returns>Returns True if word count is less custom limit value, 
         /// if it's equal or more, returns False.</returns>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   IsWordCountLess     (this string value, int limit)
+        public static bool   HasWordCountLess     (this string value, int limit)
         {
             if (value.IsNull()) throw new NullReferenceException(nameof(value));
 
@@ -306,7 +306,7 @@ namespace ExtensionMethods
         /// <returns>Returns True if word count is more than custom limit value, 
         /// if it's equal or less, returns False.</returns>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   IsWordCountMore     (this string value, int limit)
+        public static bool   HasWordCountMore     (this string value, int limit)
         {
             if (value.IsNull()) throw new NullReferenceException(nameof(value));
 
@@ -320,7 +320,7 @@ namespace ExtensionMethods
         /// <returns>Returns True if word count is less or equal to custom limit value, 
         /// if it's more, returns False.</returns>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   IsWordCountLessOrEqual(this string value, int limit)
+        public static bool   HasWordCountLessOrEqual(this string value, int limit)
         {
             if (value.IsNull()) throw new NullReferenceException(nameof(value));
 
@@ -334,7 +334,7 @@ namespace ExtensionMethods
         /// <returns>Returns True if word count is more or equal to custom limit value, 
         /// if it's less, returns False.</returns>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   IsWordCountMoreOrEqual(this string value, int limit)
+        public static bool   HasWordCountMoreOrEqual(this string value, int limit)
         {
             if (value.IsNull()) throw new NullReferenceException(nameof(value));
 
@@ -348,7 +348,7 @@ namespace ExtensionMethods
         /// <returns>Returns True if word count is equal to custom limit value, 
         /// if it's not, returns False.</returns>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool IsWordCountEqual(this string value, int limit)
+        public static bool   HasWordCountEqual      (this string value, int limit)
         {
             if (value.IsNull()) throw new NullReferenceException(nameof(value));
 

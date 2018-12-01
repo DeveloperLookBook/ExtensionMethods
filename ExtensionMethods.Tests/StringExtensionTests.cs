@@ -483,7 +483,7 @@ namespace Tests
         {
             try
             {
-                return value.IsWordCountLess(limit);
+                return value.HasWordCountLess(limit);
             }
             catch (NullReferenceException)
             {
@@ -503,7 +503,7 @@ namespace Tests
         {
             try
             {
-                return value.IsWordCountMore(limit);
+                return value.HasWordCountMore(limit);
             }
             catch (NullReferenceException)
             {
@@ -524,7 +524,7 @@ namespace Tests
         {
             try
             {
-                return value.IsWordCountLessOrEqual(limit);
+                return value.HasWordCountLessOrEqual(limit);
             }
             catch (NullReferenceException)
             {
@@ -544,7 +544,7 @@ namespace Tests
         {
             try
             {
-                return value.IsWordCountMoreOrEqual(limit);
+                return value.HasWordCountMoreOrEqual(limit);
             }
             catch (NullReferenceException)
             {
@@ -564,7 +564,7 @@ namespace Tests
         {
             try
             {
-                return value.IsWordCountEqual(limit);
+                return value.HasWordCountEqual(limit);
             }
             catch (NullReferenceException)
             {
