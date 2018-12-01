@@ -150,6 +150,8 @@ namespace ExtensionMethods
         /// </summary>
         public static bool   TrimedLeft          (this string value)
         {
+            if (value.IsNull()) throw new NullReferenceException();
+
             var isTrimmedLeft = false;
 
             if (value.IsEmpty())
