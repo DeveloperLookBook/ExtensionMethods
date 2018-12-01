@@ -306,11 +306,25 @@ namespace ExtensionMethods
         /// <returns>Returns True if word count is more than custom limit value, 
         /// if it's equal or less, returns False.</returns>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool IsWordCountMore(this string value, int limit)
+        public static bool   IsWordCountMore     (this string value, int limit)
         {
             if (value.IsNull()) throw new NullReferenceException(nameof(value));
 
             return (value.WordCount() > limit);
+        }
+
+        /// <summary>
+        /// Checks if word count is less or equal to custom limit value. 
+        /// </summary>
+        /// <param name="limit">Word count limit.</param>
+        /// <returns>Returns True if word count is less or equal to custom limit value, 
+        /// if it's more, returns False.</returns>
+        /// <exception cref="NullReferenceException"></exception>
+        public static bool   IsWordCountLessOrEqual(this string value, int limit)
+        {
+            if (value.IsNull()) throw new NullReferenceException(nameof(value));
+
+            return (value.WordCount() <= limit);
         }
 
 
