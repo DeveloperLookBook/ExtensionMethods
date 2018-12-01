@@ -209,9 +209,10 @@ namespace Tests
         [TestCase(""   , "abc", RegexOptions.Multiline, ExpectedResult = false)]
         [TestCase(""   , "123", RegexOptions.Multiline, ExpectedResult = false)]
         [TestCase(""   , "-.,", RegexOptions.Multiline, ExpectedResult = false)]
-        [TestCase(null , "abc", RegexOptions.Multiline, ExpectedResult = typeof(NullReferenceException))]
-        [TestCase(null , null , RegexOptions.Multiline, ExpectedResult = typeof(NullReferenceException))]
-        [TestCase(""   , null , RegexOptions.Multiline, ExpectedResult = typeof(ArgumentNullException ))]
+        [TestCase(null , "abc", RegexOptions.Multiline, ExpectedResult = typeof(NullReferenceException     ))]
+        [TestCase(null , null , RegexOptions.Multiline, ExpectedResult = typeof(NullReferenceException     ))]
+        [TestCase(""   , null , RegexOptions.Multiline, ExpectedResult = typeof(ArgumentNullException      ))]
+        [TestCase(""   , ""   , 1000                  , ExpectedResult = typeof(ArgumentOutOfRangeException))]
         #endregion
         public object IsMatch(string value, string pattern, RegexOptions options = RegexOptions.Multiline)
         {
@@ -224,6 +225,57 @@ namespace Tests
                 return exc.GetType();
             }
             catch(ArgumentNullException exc)
+            {
+                return exc.GetType();
+            }
+            catch(ArgumentOutOfRangeException exc)
+            {
+                return exc.GetType();
+            }
+        }
+
+        #region TEST DATA
+        [TestCase("abc", "abc", ExpectedResult = false)]
+        [TestCase("123", "123", ExpectedResult = false)]
+        [TestCase("-.,", "-.,", ExpectedResult = false)]
+        [TestCase("abc", "123", ExpectedResult = true )]
+        [TestCase("123", "abc", ExpectedResult = true )]
+        [TestCase(""   , "abc", ExpectedResult = true )]
+        [TestCase(""   , "123", ExpectedResult = true )]
+        [TestCase(""   , "-.,", ExpectedResult = true )]
+        [TestCase(null , "abc", ExpectedResult = typeof(NullReferenceException))]
+        [TestCase(null , null , ExpectedResult = typeof(NullReferenceException))]
+        [TestCase(""   , null , ExpectedResult = typeof(ArgumentNullException ))]
+
+        [TestCase("abc", "abc", RegexOptions.Multiline, ExpectedResult = false)]
+        [TestCase("123", "123", RegexOptions.Multiline, ExpectedResult = false)]
+        [TestCase("-.,", "-.,", RegexOptions.Multiline, ExpectedResult = false)]
+        [TestCase("-.,", "-.,", RegexOptions.Multiline, ExpectedResult = false)]
+        [TestCase("abc", "123", RegexOptions.Multiline, ExpectedResult = true )]
+        [TestCase("123", "abc", RegexOptions.Multiline, ExpectedResult = true )]
+        [TestCase(""   , "abc", RegexOptions.Multiline, ExpectedResult = true )]
+        [TestCase(""   , "123", RegexOptions.Multiline, ExpectedResult = true )]
+        [TestCase(""   , "-.,", RegexOptions.Multiline, ExpectedResult = true )]
+        [TestCase(null , "abc", RegexOptions.Multiline, ExpectedResult = typeof(NullReferenceException     ))]
+        [TestCase(null , null , RegexOptions.Multiline, ExpectedResult = typeof(NullReferenceException     ))]
+        [TestCase(""   , null , RegexOptions.Multiline, ExpectedResult = typeof(ArgumentNullException      ))]
+        [TestCase(""   , ""   , 1000                  , ExpectedResult = typeof(ArgumentOutOfRangeException))]
+        #endregion
+        public object IsNotMatch(string value, string pattern, RegexOptions options = RegexOptions.Multiline)
+        {
+            try
+            {
+                return value.IsNotMatch(pattern, options);
+            }
+            catch (NullReferenceException exc)
+            {
+                return exc.GetType();
+            }
+            catch(ArgumentNullException exc)
+            {
+                return exc.GetType();
+            }
+            catch(ArgumentOutOfRangeException exc)
             {
                 return exc.GetType();
             }

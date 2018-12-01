@@ -105,12 +105,15 @@ namespace ExtensionMethods
         public static bool   HasLengthInRange    (this string value, int min, int max) => value.HasLengthMoreOrEqual(min) && value.HasLengthLessOrEqual(max);
 
         /// <summary>
-        /// Checks if string matches pattern. Returns True if string matches pattern, or False, if it's not.
+        /// Checks if string matches pattern. Returns True if string matches pattern, 
+        /// or False, if it's not.
         /// </summary>
         /// <param name="pattern">Pattern of the regular expression.</param>
         /// <param name="options">Regular expression options.</param>
         /// <exception cref="NullReferenceException"></exception>
+        /// <exception cref="ArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public static bool   IsMatch             (this string value, string pattern, RegexOptions options = RegexOptions.Multiline)
         {
             if (value.IsNull()  ) throw new NullReferenceException();
@@ -123,6 +126,28 @@ namespace ExtensionMethods
             return isMatch;
         }
 
+        /// <summary>
+        /// Checks if string matches pattern. Returns True if string matches pattern, 
+        /// or False, if it's not.
+        /// </summary>
+        /// <param name="pattern">Pattern of the regular expression.</param>
+        /// <param name="options">Regular expression options.</param>
+        /// <exception cref="NullReferenceException"></exception>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public static bool   IsNotMatch             (this string value, string pattern, RegexOptions options = RegexOptions.Multiline)
+        {
+            if (value.IsNull()  ) throw new NullReferenceException();
+            if (pattern.IsNull()) throw new ArgumentNullException (nameof(pattern));
+           
+            return !value.IsMatch(pattern, options);
+        }
+
+        /// <summary>
+        /// Checks if string is trimmed from left side. Returns True if string trimmed from 
+        /// left side, or False, if it's not.
+        /// </summary>
         public static bool   TrimedLeft          (this string value)
         {
             var isTrimmedLeft = false;
