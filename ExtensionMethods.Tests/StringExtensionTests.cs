@@ -448,5 +448,27 @@ namespace Tests
                 return exc.GetType();
             }
         }
+
+        #region TEST DATA
+        [TestCase(""     , ExpectedResult = 0)]
+        [TestCase(" "    , ExpectedResult = 0)]
+        [TestCase("  "   , ExpectedResult = 0)]
+        [TestCase("   "  , ExpectedResult = 0)]
+        [TestCase("a"    , ExpectedResult = 1)]
+        [TestCase("a b"  , ExpectedResult = 2)]
+        [TestCase("a b c", ExpectedResult = 3)]
+        [TestCase(null   , ExpectedResult = typeof(NullReferenceException))]
+        #endregion
+        public object WordCount(string value)
+        {
+            try
+            {
+                return value.WordCount();
+            }
+            catch (NullReferenceException)
+            {
+                return typeof(NullReferenceException);
+            }
+        }
     }
 }

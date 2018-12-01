@@ -210,7 +210,8 @@ namespace ExtensionMethods
         /// <summary>
         /// Checks if all letters that are present in the string have uppercase format. 
         /// Returns true if all letters that are present in the string have uppercase 
-        /// format, or false if they aren't. (Returns True if string is empty)
+        /// format, or false if they aren't (Returns True if string is empty).
+        /// Example: "ABC, 123!".HasLowercase() will return True.
         /// </summary>
         /// <exception cref="NullReferenceException"></exception>
         public static bool   HasUppercase        (this string value)
@@ -226,8 +227,9 @@ namespace ExtensionMethods
 
         /// <summary>
         /// Checks if all letters that are present in the string have lowercase format. 
-        /// Returns true if all letters that are present in the string have uppercase 
-        /// format, or false if they aren't. (Returns True if string is empty)
+        /// Returns true if all letters that are present in the string have lowercase 
+        /// format, or false if they aren't (Returns True if string is empty).
+        /// Example: "abc, 123!".HasLowercase() will return True.
         /// </summary>
         /// <exception cref="NullReferenceException"></exception>
         public static bool   HasLowercase        (this string value)
@@ -241,20 +243,10 @@ namespace ExtensionMethods
             return isUppercase;
         }
             
-        public static bool   SentenceCased       (this string value) => value.IsMatch(@"\A[\p{Lu}].*\z");                             
-                      
+
+        public static bool   SentenceCased       (this string value) => value.IsMatch(@"\A[\p{Lu}].*\z");              
         
-        public static bool   HasNoLetters        (this string value) => !value.IsMatch(@"\p{L}" );
-        public static bool   HasNoMarks          (this string value) => !value.IsMatch(@"\p{M}" );
-        public static bool   HasNoNumbers        (this string value) => !value.IsMatch(@"\p{N}" );
-        public static bool   HasNoPunctuation    (this string value) => !value.IsMatch(@"\p{P}" );
-        public static bool   HasNoSymbols        (this string value) => !value.IsMatch(@"\p{S}" );
-        public static bool   HasNoSeparators     (this string value) => !value.IsMatch(@"\p{Z}" );
-        public static bool   HasNoControls       (this string value) => !value.IsMatch(@"\p{C}" ); 
-        
-        public static bool   HasNoLatinCharacters(this string value) => value.IsMatch (@"a-zA-Z");     
-                             
-                             
+          
         public static bool   HasLetters          (this string value) => value.IsMatch(@"\p{L}" );
         public static bool   HasMarks            (this string value) => value.IsMatch(@"\p{M}" );
         public static bool   HasNumbers          (this string value) => value.IsMatch(@"\p{N}" );
@@ -264,6 +256,33 @@ namespace ExtensionMethods
         public static bool   HasControls         (this string value) => value.IsMatch(@"\p{C}" );
 
         public static bool   HasLatinCharacters  (this string value) => !HasNoLatinCharacters(value);
+
+        
+        public static bool   HasNoLetters        (this string value) => !value.HasLetters    ();
+        public static bool   HasNoMarks          (this string value) => !value.HasMarks      ();
+        public static bool   HasNoNumbers        (this string value) => !value.HasNumbers    ();
+        public static bool   HasNoPunctuation    (this string value) => !value.HasPunctuation();
+        public static bool   HasNoSymbols        (this string value) => !value.HasSymbols    ();
+        public static bool   HasNoSeparators     (this string value) => !value.HasSeparators ();
+        public static bool   HasNoControls       (this string value) => !value.HasControls   (); 
+        
+        public static bool   HasNoLatinCharacters(this string value) => value.IsMatch (@"a-zA-Z");
+
+        /// <summary>
+        /// Counts words in the string.
+        /// </summary>
+        /// <returns>Return number of words in the string.</returns>
+        public static int    WordCount(this string value)
+        {
+            if (value.IsNull()) { throw new NullReferenceException(nameof(value)); }
+
+            var input = value;
+            var pattern = @"\b\w+\b";
+            var options = RegexOptions.Multiline;
+            var number  = Regex.Matches(input, pattern, options).Count;
+
+            return number;
+        }
 
         /// <summary>
         /// Escape string.
