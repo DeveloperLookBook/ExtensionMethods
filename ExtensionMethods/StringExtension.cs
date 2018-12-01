@@ -149,7 +149,7 @@ namespace ExtensionMethods
         /// the left side, or False, if it's not.
         /// </summary>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   IsTrimedLeft          (this string value)
+        public static bool   IsTrimmedLeft          (this string value)
         {
             if (value.IsNull()) throw new NullReferenceException();
 
@@ -177,7 +177,7 @@ namespace ExtensionMethods
         /// the right side, or False, if it's not.
         /// </summary>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   IsTrimedRight         (this string value)
+        public static bool   IsTrimmedRight         (this string value)
         {
             if (value.IsNull()) throw new NullReferenceException();
 
@@ -205,7 +205,7 @@ namespace ExtensionMethods
         /// is trimmed from both sides, or False if it's not.
         /// </summary>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   IsTrimed            (this string value) => (value.IsTrimedLeft() && value.IsTrimedRight());
+        public static bool   IsTrimmed            (this string value) => (value.IsTrimmedLeft() && value.IsTrimmedRight());
 
         /// <summary>
         /// Checks if all letters that are present in the string have uppercase format. 
@@ -213,13 +213,30 @@ namespace ExtensionMethods
         /// format, or false if they aren't. (Returns True if string is empty)
         /// </summary>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   IsUppercase        (this string value)
+        public static bool   HasUppercase        (this string value)
         {
             if (value.IsNull()) { throw new NullReferenceException(nameof(value)); }
 
             var input       = value;
             var options     = RegexOptions.Multiline;
             var isUppercase = Regex.IsMatch(input, @"\A[\p{Lu}\p{M}\p{N}\p{P}\p{S}\p{Z}\p{C}]*\z", options);
+
+            return isUppercase;
+        }
+
+        /// <summary>
+        /// Checks if all letters that are present in the string have lowercase format. 
+        /// Returns true if all letters that are present in the string have uppercase 
+        /// format, or false if they aren't. (Returns True if string is empty)
+        /// </summary>
+        /// <exception cref="NullReferenceException"></exception>
+        public static bool   HasLowercase        (this string value)
+        {
+            if (value.IsNull()) { throw new NullReferenceException(nameof(value)); }
+
+            var input       = value;
+            var options     = RegexOptions.Multiline;
+            var isUppercase = Regex.IsMatch(input, @"\A[\p{Ll}\p{M}\p{N}\p{P}\p{S}\p{Z}\p{C}]*\z", options);
 
             return isUppercase;
         }

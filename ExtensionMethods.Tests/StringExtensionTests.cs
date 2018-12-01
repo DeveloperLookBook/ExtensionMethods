@@ -295,11 +295,11 @@ namespace Tests
         [TestCase(" -.!" , ExpectedResult = false)]
         [TestCase(null   , ExpectedResult = typeof(NullReferenceException))]
         #endregion
-        public object IsTrimedLeft(string value)
+        public object IsTrimmedLeft(string value)
         {
             try
             {
-                return value.IsTrimedLeft();
+                return value.IsTrimmedLeft();
             }
             catch (NullReferenceException exc)
             {
@@ -321,11 +321,11 @@ namespace Tests
         [TestCase("-.! " , ExpectedResult = false)]
         [TestCase(null   , ExpectedResult = typeof(NullReferenceException))]
         #endregion
-        public object IsTrimedRight(string value)
+        public object IsTrimmedRight(string value)
         {
             try
             {
-                return value.IsTrimedRight();
+                return value.IsTrimmedRight();
             }
             catch (NullReferenceException exc)
             {
@@ -353,11 +353,11 @@ namespace Tests
         [TestCase(" -.! ", ExpectedResult = false)]
         [TestCase(null   , ExpectedResult = typeof(NullReferenceException))]
         #endregion
-        public object IsTrimed(string value)
+        public object IsTrimmed(string value)
         {
             try
             {
-                return value.IsTrimed();
+                return value.IsTrimmed();
             }
             catch (NullReferenceException exc)
             {
@@ -390,17 +390,58 @@ namespace Tests
         [TestCase("a!!", ExpectedResult = false)]
         [TestCase("!a!", ExpectedResult = false)]
         [TestCase("!!a", ExpectedResult = false)]
-        [TestCase("!!a", ExpectedResult = false)]
         [TestCase("a  ", ExpectedResult = false)]
         [TestCase(" a ", ExpectedResult = false)]
         [TestCase("  a", ExpectedResult = false)]
         [TestCase(null , ExpectedResult = typeof(NullReferenceException))]
         #endregion
-        public object IsUppercase(string value)
+        public object HasUppercase(string value)
         {
             try
             {
-                return value.IsUppercase();
+                return value.HasUppercase();
+            }
+            catch (NullReferenceException exc)
+            {
+                return exc.GetType();
+            }
+        }
+
+        #region TEST DATA
+        [TestCase(""   , ExpectedResult = true )]
+        [TestCase("abc", ExpectedResult = true )]
+        [TestCase("123", ExpectedResult = true )]
+        [TestCase(",.!", ExpectedResult = true )]
+        [TestCase("   ", ExpectedResult = true )]
+        [TestCase("a12", ExpectedResult = true )]
+        [TestCase("1a2", ExpectedResult = true )]
+        [TestCase("12a", ExpectedResult = true )]
+        [TestCase("a!!", ExpectedResult = true )]
+        [TestCase("!a!", ExpectedResult = true )]
+        [TestCase("!!a", ExpectedResult = true )]
+        [TestCase("a  ", ExpectedResult = true )]
+        [TestCase(" a ", ExpectedResult = true )]
+        [TestCase("  a", ExpectedResult = true )]
+        [TestCase("ABC", ExpectedResult = false)]
+        [TestCase("aBC", ExpectedResult = false)]
+        [TestCase("AbC", ExpectedResult = false)]
+        [TestCase("ABc", ExpectedResult = false)]
+        [TestCase("A12", ExpectedResult = false)]
+        [TestCase("1A2", ExpectedResult = false)]
+        [TestCase("12A", ExpectedResult = false)]
+        [TestCase("A!!", ExpectedResult = false)]
+        [TestCase("!A!", ExpectedResult = false)]
+        [TestCase("!!A", ExpectedResult = false)]
+        [TestCase("A  ", ExpectedResult = false)]
+        [TestCase(" A ", ExpectedResult = false)]
+        [TestCase("  A", ExpectedResult = false)]
+        [TestCase(null , ExpectedResult = typeof(NullReferenceException))]
+        #endregion
+        public object HasLowercase(string value)
+        {
+            try
+            {
+                return value.HasLowercase();
             }
             catch (NullReferenceException exc)
             {
