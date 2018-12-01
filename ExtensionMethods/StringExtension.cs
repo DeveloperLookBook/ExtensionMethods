@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace ExtensionMethods
@@ -148,7 +149,7 @@ namespace ExtensionMethods
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public static bool   IsNotMatch             (this string value, string pattern, RegexOptions options = RegexOptions.Multiline)
+        public static bool   IsNotMatch          (this string value, string pattern, RegexOptions options = RegexOptions.Multiline)
         {
             if (value.IsNull()  ) throw new NullReferenceException();
             if (pattern.IsNull()) throw new ArgumentNullException (nameof(pattern));
@@ -161,7 +162,7 @@ namespace ExtensionMethods
         /// the left side, or False, if it's not.
         /// </summary>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   IsTrimmedLeft          (this string value)
+        public static bool   IsTrimmedLeft       (this string value)
         {
             if (value.IsNull()) throw new NullReferenceException();
 
@@ -189,7 +190,7 @@ namespace ExtensionMethods
         /// the right side, or False, if it's not.
         /// </summary>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   IsTrimmedRight         (this string value)
+        public static bool   IsTrimmedRight      (this string value)
         {
             if (value.IsNull()) throw new NullReferenceException();
 
@@ -217,7 +218,7 @@ namespace ExtensionMethods
         /// is trimmed from both sides, or False if it's not.
         /// </summary>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   IsTrimmed            (this string value) => (value.IsTrimmedLeft() && value.IsTrimmedRight());
+        public static bool   IsTrimmed           (this string value) => (value.IsTrimmedLeft() && value.IsTrimmedRight());
 
         /// <summary>
         /// Checks if all letters that are present in the string have uppercase format. 
@@ -254,7 +255,36 @@ namespace ExtensionMethods
 
             return isUppercase;
         }
-            
+
+        /// <summary>
+        /// Converts the specified string to title case (except for words that are entirely
+        /// in uppercase, which are considered to be acronyms).
+        /// Example: String "TEST text." will be converted to "TEST Text.".
+        /// </summary>
+        /// <param name="culture">Culture information that will be used to create 
+        /// new string with title-case format.</param>
+        /// <returns>The specified string converted to title case.</returns>
+        public static string ToTitleCase         (this string value, CultureInfo culture)
+        {
+            if (value   is null) throw new NullReferenceException(nameof(value  ));
+            if (culture is null) throw new ArgumentNullException (nameof(culture));
+
+            return culture.TextInfo.ToTitleCase(value);
+        }
+
+        /// <summary>
+        /// Checks if the specified string has title case format.
+        /// </summary>
+        /// <param name="culture">Culture information that will be used to create 
+        /// new string with title-case format.</param>
+        /// <returns>Returns True if string has title case format.</returns>
+        public static bool   HasTitleCase        (this string value, CultureInfo culture)
+        {
+            if (value   is null) throw new NullReferenceException(nameof(value  ));
+            if (culture is null) throw new ArgumentNullException (nameof(culture));
+
+            return (value == value.ToTitleCase(culture));
+        }
 
         public static bool   SentenceCased       (this string value) => value.IsMatch(@"\A[\p{Lu}].*\z");              
         
@@ -304,7 +334,7 @@ namespace ExtensionMethods
         /// <returns>Returns True if word count is less custom limit value, 
         /// if it's equal or more, returns False.</returns>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   HasWordCountLess     (this string value, int limit)
+        public static bool   HasWordCountLess    (this string value, int limit)
         {
             if (value.IsNull()) throw new NullReferenceException(nameof(value));
 
@@ -318,7 +348,7 @@ namespace ExtensionMethods
         /// <returns>Returns True if word count is more than custom limit value, 
         /// if it's equal or less, returns False.</returns>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   HasWordCountMore     (this string value, int limit)
+        public static bool   HasWordCountMore    (this string value, int limit)
         {
             if (value.IsNull()) throw new NullReferenceException(nameof(value));
 
@@ -360,7 +390,7 @@ namespace ExtensionMethods
         /// <returns>Returns True if word count is equal to custom limit value, 
         /// if it's not, returns False.</returns>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   HasWordCountEqual      (this string value, int limit)
+        public static bool   HasWordCountEqual   (this string value, int limit)
         {
             if (value.IsNull()) throw new NullReferenceException(nameof(value));
 

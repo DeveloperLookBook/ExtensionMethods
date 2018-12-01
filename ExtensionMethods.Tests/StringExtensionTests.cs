@@ -1,6 +1,7 @@
 using ExtensionMethods;
 using NUnit.Framework;
 using System;
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace Tests
@@ -485,6 +486,46 @@ namespace Tests
             try
             {
                 return value.HasLowercase();
+            }
+            catch (NullReferenceException exc)
+            {
+                return exc.GetType();
+            }
+        }
+
+        #region TEST DATA
+        [TestCase("TEST text."    , ExpectedResult = "TEST Text."    )]
+        [TestCase("test text."    , ExpectedResult = "Test Text."    )]
+        [TestCase("test nor test.", ExpectedResult = "Test Nor Test.")]
+        [TestCase(null            , ExpectedResult = typeof(NullReferenceException))]
+        #endregion
+        public object ToTitleCase(string value)
+        {
+            try
+            {
+                return value.ToTitleCase(new CultureInfo("En-en"));
+            }
+            catch (NullReferenceException exc)
+            {
+                return exc.GetType();
+            }
+        }
+
+        #region TEST DATA
+        [TestCase("TEST text."    , ExpectedResult = false)]
+        [TestCase("test text."    , ExpectedResult = false)]
+        [TestCase("test nor test.", ExpectedResult = false)]
+        [TestCase("TEST Text."    , ExpectedResult = true )]
+        [TestCase("Test Text."    , ExpectedResult = true )]
+        [TestCase("Test Nor Test.", ExpectedResult = true )]
+        [TestCase(""              , ExpectedResult = true )]
+        [TestCase(null            , ExpectedResult = typeof(NullReferenceException))]
+        #endregion
+        public object HasTitleCase(string value)
+        {
+            try
+            {
+                return value.HasTitleCase(new CultureInfo("En-en"));
             }
             catch (NullReferenceException exc)
             {
