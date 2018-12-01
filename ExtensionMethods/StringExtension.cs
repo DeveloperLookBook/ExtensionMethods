@@ -272,7 +272,8 @@ namespace ExtensionMethods
         /// Counts words in the string.
         /// </summary>
         /// <returns>Return number of words in the string.</returns>
-        public static int    WordCount(this string value)
+        /// <exception cref="NullReferenceException"></exception>
+        public static int    WordCount           (this string value)
         {
             if (value.IsNull()) { throw new NullReferenceException(nameof(value)); }
 
@@ -282,6 +283,34 @@ namespace ExtensionMethods
             var number  = Regex.Matches(input, pattern, options).Count;
 
             return number;
+        }
+
+        /// <summary>
+        /// Checks if word count is less than custom limit value. 
+        /// </summary>
+        /// <param name="limit">Word count limit.</param>
+        /// <returns>Returns True if word count is less custom limit value, 
+        /// if it's equal or more, returns False.</returns>
+        /// <exception cref="NullReferenceException"></exception>
+        public static bool   IsWordCountLess     (this string value, int limit)
+        {
+            if (value.IsNull()) throw new NullReferenceException(nameof(value));
+
+            return (value.WordCount() < limit);
+        }
+
+        /// <summary>
+        /// Checks if word count is less than custom limit value. 
+        /// </summary>
+        /// <param name="limit">Word count limit.</param>
+        /// <returns>Returns True if word count is less custom limit value, 
+        /// if it's equal or more, returns False.</returns>
+        /// <exception cref="NullReferenceException"></exception>
+        public static bool IsWordCountMore(this string value, int limit)
+        {
+            if (value.IsNull()) throw new NullReferenceException(nameof(value));
+
+            return (value.WordCount() > limit);
         }
 
         /// <summary>
