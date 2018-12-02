@@ -539,10 +539,18 @@ namespace Tests
         [TestCase(""    , ExpectedResult = false)]
         [TestCase(" "   , ExpectedResult = false)]
         [TestCase("1234", ExpectedResult = false)]
+        [TestCase(null, ExpectedResult = typeof(NullReferenceException))]
         #endregion
         public object HasEnglishLetters(string value)
         {
-            return value.HasEnglishLetters();
+            try
+            {
+                return value.HasEnglishLetters();
+            }
+            catch (NullReferenceException exc)
+            {
+                return exc.GetType();
+            }
         }
 
         #region TEST DATA
@@ -551,10 +559,18 @@ namespace Tests
         [TestCase(""    , ExpectedResult = false)]
         [TestCase(" "   , ExpectedResult = false)]
         [TestCase("1234", ExpectedResult = false)]
+        [TestCase(null  , ExpectedResult = typeof(NullReferenceException))]
         #endregion
         public object HasUkrainianLetters(string value)
         {
-            return value.HasUkrainianLetters();
+            try
+            {
+                return value.HasUkrainianLetters();
+            }
+            catch (NullReferenceException exc)
+            {
+                return exc.GetType();
+            }
         }
 
         #region TEST DATA
@@ -563,10 +579,18 @@ namespace Tests
         [TestCase(""    , ExpectedResult = false)]
         [TestCase(" "   , ExpectedResult = false)]
         [TestCase("1234", ExpectedResult = false)]
+        [TestCase(null  , ExpectedResult = typeof(NullReferenceException))]
         #endregion
         public object HasRussianLetters(string value)
         {
-            return value.HasRussianLetters();
+            try
+            {
+                return value.HasRussianLetters();
+            }
+            catch (NullReferenceException exc)
+            {
+                return exc.GetType();
+            }
         }
 
         #region TEST DATA
@@ -575,10 +599,18 @@ namespace Tests
         [TestCase(""    , ExpectedResult = true )]
         [TestCase(" "   , ExpectedResult = true )]
         [TestCase("1234", ExpectedResult = true )]
+        [TestCase(null  , ExpectedResult = typeof(NullReferenceException))]
         #endregion
         public object HasNoEnglishLetters(string value)
         {
-            return value.HasNoEnglishLetters();
+            try
+            {
+                return value.HasNoEnglishLetters();
+            }
+            catch (NullReferenceException exc)
+            {
+                return exc.GetType();
+            }
         }
 
         #region TEST DATA
@@ -587,10 +619,18 @@ namespace Tests
         [TestCase(""    , ExpectedResult = true )]
         [TestCase(" "   , ExpectedResult = true )]
         [TestCase("1234", ExpectedResult = true )]
+        [TestCase(null  , ExpectedResult = typeof(NullReferenceException))]
         #endregion
         public object HasNoUkrainianLetters(string value)
         {
-            return value.HasNoUkrainianLetters();
+            try
+            {
+                return value.HasNoUkrainianLetters();
+            }
+            catch (NullReferenceException exc)
+            {
+                return exc.GetType();
+            }
         }
 
         #region TEST DATA
@@ -599,10 +639,18 @@ namespace Tests
         [TestCase(""    , ExpectedResult = true )]
         [TestCase(" "   , ExpectedResult = true )]
         [TestCase("1234", ExpectedResult = true )]
+        [TestCase(null  , ExpectedResult = typeof(NullReferenceException))]
         #endregion
         public object HasNoRussianLetters(string value)
         {
-            return value.HasNoRussianLetters();
+            try
+            {
+                return value.HasNoRussianLetters();
+            }
+            catch (NullReferenceException exc)
+            {
+                return exc.GetType();
+            }
         }
 
         #region TEST DATA

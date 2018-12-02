@@ -21,19 +21,19 @@ namespace ExtensionMethods
         /// <summary>
         /// Checks if string is Null. Returns True if string is Null, or False if not
         /// </summary>
-        public static bool   IsNull              (this string value) => (value is null);
+        public static bool   IsNull                 (this string value) => (value is null);
 
         /// <summary>
         /// Checks if string is not Null. Returns True if string is not Null, or False if it 
         /// is Null.
         /// </summary>
-        public static bool   IsNotNull           (this string value) => !value.IsNull();
+        public static bool   IsNotNull              (this string value) => !value.IsNull();
 
         /// <summary>
         /// Checks if string is Empty. Returns True if string is Empty, or False if it is not.
         /// </summary>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   IsEmpty             (this string value)
+        public static bool   IsEmpty                (this string value)
         {
             if (value.IsNull()) throw new NullReferenceException();
 
@@ -45,14 +45,14 @@ namespace ExtensionMethods
         /// is Empty.
         /// </summary>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   IsNotEmpty          (this string value) => !value.IsEmpty();
+        public static bool   IsNotEmpty             (this string value) => !value.IsEmpty();
 
         /// <summary>
         /// Checks if string consist from whit-spaces only. Returns True if string consist from 
         /// whit-spaces only, or False if it's not. (Returns false if string is empty.)
         /// </summary>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   IsWhiteSpace        (this string value)
+        public static bool   IsWhiteSpace           (this string value)
         {
             try
             {
@@ -350,7 +350,7 @@ namespace ExtensionMethods
         /// doesn't.</returns>
         public static bool   HasRussianLetters      (this string value)
         {
-            if (value.IsNull()) throw new ArgumentNullException(nameof(value));
+            if (value.IsNull()) throw new NullReferenceException();
 
             return value.IsMatch($@"[{RussianLetters}]+");
         }
@@ -389,6 +389,8 @@ namespace ExtensionMethods
         /// False if it does.</returns>
         public static bool   HasNoRussianLetters    (this string value)
         {
+            if (value.IsNull()) throw new NullReferenceException();
+
             return !value.HasRussianLetters();
         }
 
