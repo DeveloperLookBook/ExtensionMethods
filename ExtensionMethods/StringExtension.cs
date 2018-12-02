@@ -278,37 +278,58 @@ namespace ExtensionMethods
         /// <param name="culture">Culture information that will be used to create 
         /// new string with title-case format.</param>
         /// <returns>Returns True if string has title case format.</returns>
-        public static bool   HasTitleCase        (this string value, CultureInfo culture)
+        public static bool   HasTitleCase         (this string value, CultureInfo culture)
         {
             if (value   is null) throw new NullReferenceException(nameof(value  ));
             if (culture is null) throw new ArgumentNullException (nameof(culture));
 
             return (value == value.ToTitleCase(culture));
         }
+                                                  
+        public static bool   SentenceCased        (this string value) => value.IsMatch(@"\A[\p{Lu}].*\z");              
+                                                  
+                                                  
+        public static bool   HasLetters           (this string value) => value.IsMatch(@"\p{L}" );
+        public static bool   HasMarks             (this string value) => value.IsMatch(@"\p{M}" );
+        public static bool   HasNumbers           (this string value) => value.IsMatch(@"\p{N}" );
+        public static bool   HasPunctuation       (this string value) => value.IsMatch(@"\p{P}" );
+        public static bool   HasSymbols           (this string value) => value.IsMatch(@"\p{S}" );
+        public static bool   HasSeparators        (this string value) => value.IsMatch(@"\p{Z}" );
+        public static bool   HasControls          (this string value) => value.IsMatch(@"\p{C}" );
+                                                  
+        public static bool   HasNoLetters         (this string value) => !value.HasLetters    ();
+        public static bool   HasNoMarks           (this string value) => !value.HasMarks      ();
+        public static bool   HasNoNumbers         (this string value) => !value.HasNumbers    ();
+        public static bool   HasNoPunctuation     (this string value) => !value.HasPunctuation();
+        public static bool   HasNoSymbols         (this string value) => !value.HasSymbols    ();
+        public static bool   HasNoSeparators      (this string value) => !value.HasSeparators ();
+        public static bool   HasNoControls        (this string value) => !value.HasControls   ();
 
-        public static bool   SentenceCased       (this string value) => value.IsMatch(@"\A[\p{Lu}].*\z");              
-        
-          
-        public static bool   HasLetters          (this string value) => value.IsMatch(@"\p{L}" );
-        public static bool   HasMarks            (this string value) => value.IsMatch(@"\p{M}" );
-        public static bool   HasNumbers          (this string value) => value.IsMatch(@"\p{N}" );
-        public static bool   HasPunctuation      (this string value) => value.IsMatch(@"\p{P}" );
-        public static bool   HasSymbols          (this string value) => value.IsMatch(@"\p{S}" );
-        public static bool   HasSeparators       (this string value) => value.IsMatch(@"\p{Z}" );
-        public static bool   HasControls         (this string value) => value.IsMatch(@"\p{C}" );
+        public static bool   HasEnglishLetters    (this string value)
+        {
+            if (value.IsNull()) throw new NullReferenceException();
 
-        public static bool   HasLatinCharacters  (this string value) => !HasNoLatinCharacters(value);
+            return value.IsMatch(@"[a-zA-Z]+");
+        }
+        public static bool   HasUkrainianLetters  (this string value)
+        {
+            if (value.IsNull()) throw new NullReferenceException();
 
-        
-        public static bool   HasNoLetters        (this string value) => !value.HasLetters    ();
-        public static bool   HasNoMarks          (this string value) => !value.HasMarks      ();
-        public static bool   HasNoNumbers        (this string value) => !value.HasNumbers    ();
-        public static bool   HasNoPunctuation    (this string value) => !value.HasPunctuation();
-        public static bool   HasNoSymbols        (this string value) => !value.HasSymbols    ();
-        public static bool   HasNoSeparators     (this string value) => !value.HasSeparators ();
-        public static bool   HasNoControls       (this string value) => !value.HasControls   (); 
-        
-        public static bool   HasNoLatinCharacters(this string value) => value.IsMatch (@"a-zA-Z");
+            return value.IsMatch(@"[абвгґдеєжзиіїйклмнопрстуфхцчшщьюяАБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ]");
+        }
+
+        public static bool   HasNoEnglishLetters  (this string value)
+        {
+            if (value.IsNull()) throw new NullReferenceException();
+
+            return !value.HasEnglishLetters();
+        }
+        public static bool   HasNoUkrainianLetters(this string value)
+        {
+            if (value.IsNull()) throw new NullReferenceException();
+
+            return !value.HasUkrainianLetters();
+        }
 
         /// <summary>
         /// Counts words in the string.
