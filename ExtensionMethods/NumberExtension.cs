@@ -57,10 +57,10 @@ namespace ExtensionMethods
         }
 
         /// <summary>
-        /// Checks if number is equal to specified value.
+        /// Checks if number is equal to one of the specified values.
         /// </summary>
         /// <param name="limit">Numeric value.</param>
-        /// <returns>Returns True if number is equal to specified value.</returns>
+        /// <returns>Returns True if number is equal to one of the specified values.</returns>
         public static bool IsEqual      <T>(this T number, T value, params T[] values) where T : struct, IComparable, IComparable<T>, IConvertible, IEquatable<T>, IFormattable
         {
             var isEqual = false;
@@ -83,6 +83,13 @@ namespace ExtensionMethods
 
             return isEqual;
         }
+
+        /// <summary>
+        /// Checks if number is not equal to specified value.
+        /// </summary>
+        /// <param name="number">Numeric value.</param>
+        /// <param name="value">Numeric value.</param>
+        /// <returns>Returns True if number is not equal to specified values.</returns>
         public static bool IsNotEqual   <T>(this T number, T value) where T : struct, IComparable, IComparable<T>, IConvertible, IEquatable<T>, IFormattable
         {
             return !number.IsEqual(value);

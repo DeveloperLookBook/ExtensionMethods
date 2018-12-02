@@ -63,5 +63,20 @@ namespace Tests
         {
             return value.IsEqual(limit);
         }
+
+        #region TEST DATA
+        [TestCase( 1,  1, new int[] { 2, 3, 5 }, ExpectedResult = true )]
+        [TestCase( 2,  1, new int[] { 2, 3, 5 }, ExpectedResult = true )]
+        [TestCase( 3,  1, new int[] { 2, 3, 5 }, ExpectedResult = true )]
+        [TestCase( 5,  1, new int[] { 2, 3, 5 }, ExpectedResult = true )]
+        [TestCase( 0,  0, new int[] { 2, 3, 5 }, ExpectedResult = true )]
+        [TestCase(-1, -1, new int[] { 2, 3, 5 }, ExpectedResult = true )]
+        [TestCase(-2, -1, new int[] { 2, 3, 5 }, ExpectedResult = false)]
+        [TestCase( 6,  1, new int[] { 2, 3, 5 }, ExpectedResult = false)]
+        #endregion
+        public bool IsEqual(int value, int limit, params int[] values)
+        {
+            return value.IsEqual(limit, values);
+        }
     }
 }
