@@ -534,6 +534,78 @@ namespace Tests
         }
 
         #region TEST DATA
+        [TestCase("Abcd", ExpectedResult = true )]
+        [TestCase("¿·‚" , ExpectedResult = false)]
+        [TestCase(""    , ExpectedResult = false)]
+        [TestCase(" "   , ExpectedResult = false)]
+        [TestCase("1234", ExpectedResult = false)]
+        #endregion
+        public object HasEnglishLetters(string value)
+        {
+            return value.HasEnglishLetters();
+        }
+
+        #region TEST DATA
+        [TestCase("Abcd", ExpectedResult = false)]
+        [TestCase("¿·‚≥", ExpectedResult = true )]
+        [TestCase(""    , ExpectedResult = false)]
+        [TestCase(" "   , ExpectedResult = false)]
+        [TestCase("1234", ExpectedResult = false)]
+        #endregion
+        public object HasUkrainianLetters(string value)
+        {
+            return value.HasUkrainianLetters();
+        }
+
+        #region TEST DATA
+        [TestCase("Abcd", ExpectedResult = false)]
+        [TestCase("¿·‚" , ExpectedResult = true )]
+        [TestCase(""    , ExpectedResult = false)]
+        [TestCase(" "   , ExpectedResult = false)]
+        [TestCase("1234", ExpectedResult = false)]
+        #endregion
+        public object HasRussianLetters(string value)
+        {
+            return value.HasRussianLetters();
+        }
+
+        #region TEST DATA
+        [TestCase("¿bcd", ExpectedResult = false)]
+        [TestCase("¿·‚" , ExpectedResult = true )]
+        [TestCase(""    , ExpectedResult = true )]
+        [TestCase(" "   , ExpectedResult = true )]
+        [TestCase("1234", ExpectedResult = true )]
+        #endregion
+        public object HasNoEnglishLetters(string value)
+        {
+            return value.HasNoEnglishLetters();
+        }
+
+        #region TEST DATA
+        [TestCase("Abcd", ExpectedResult = true )]
+        [TestCase("¿·‚≥", ExpectedResult = false)]
+        [TestCase(""    , ExpectedResult = true )]
+        [TestCase(" "   , ExpectedResult = true )]
+        [TestCase("1234", ExpectedResult = true )]
+        #endregion
+        public object HasNoUkrainianLetters(string value)
+        {
+            return value.HasNoUkrainianLetters();
+        }
+
+        #region TEST DATA
+        [TestCase("Abcd", ExpectedResult = true )]
+        [TestCase("¿·‚" , ExpectedResult = false)]
+        [TestCase(""    , ExpectedResult = true )]
+        [TestCase(" "   , ExpectedResult = true )]
+        [TestCase("1234", ExpectedResult = true )]
+        #endregion
+        public object HasNoRussianLetters(string value)
+        {
+            return value.HasNoRussianLetters();
+        }
+
+        #region TEST DATA
         [TestCase(""     , ExpectedResult = 0)]
         [TestCase(" "    , ExpectedResult = 0)]
         [TestCase("  "   , ExpectedResult = 0)]

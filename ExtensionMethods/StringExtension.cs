@@ -6,6 +6,18 @@ namespace ExtensionMethods
 {
     public static class StringExtension
     {
+        private static string EnglishLowercaseLetters   { get; } = "abcdefghijklmnopqrstuvwxyz";
+        private static string EnglishUppercaseLetters   { get; } = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private static string EnglishLetters            { get; } = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        private static string UkrainianLowercaseLetters { get; } = "абвгґдеєжзиіїйклмнопрстуфхцчшщьюя";
+        private static string UkrainianUppercaseLetters { get; } = "АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ";
+        private static string UkrainianLetters          { get; } = "абвгґдеєжзиіїйклмнопрстуфхцчшщьюяАБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ";
+
+        private static string RussianLowercaseLetters   { get; } = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
+        private static string RussianUppercaseLetters   { get; } = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+        private static string RussianLetters            { get; } = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+
         /// <summary>
         /// Checks if string is Null. Returns True if string is Null, or False if not
         /// </summary>
@@ -59,7 +71,7 @@ namespace ExtensionMethods
         /// (Returns true if string is empty.)
         /// </summary>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   IsNotWhiteSpace     (this string value) => !value.IsWhiteSpace();
+        public static bool   IsNotWhiteSpace        (this string value) => !value.IsWhiteSpace();
 
         /// <summary>
         /// Checks if string has length less than or equal to custom max length limit value.
@@ -68,7 +80,7 @@ namespace ExtensionMethods
         /// </summary>
         /// <param name="limit">Max length limit value.</param>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   HasLengthLessOrEqual(this string value, int limit) => (value.Length <= limit);
+        public static bool   HasLengthLessOrEqual   (this string value, int limit) => (value.Length <= limit);
 
         /// <summary>
         /// Checks if string has length more then or equal to custom min length limit value.
@@ -77,7 +89,7 @@ namespace ExtensionMethods
         /// </summary>
         /// <param name="limit">Min length limit value.</param>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   HasLengthMoreOrEqual(this string value, int limit) => (value.Length >= limit);
+        public static bool   HasLengthMoreOrEqual   (this string value, int limit) => (value.Length >= limit);
 
         /// <summary>
         /// Checks if string has length less than custom min length limit value.
@@ -86,7 +98,7 @@ namespace ExtensionMethods
         /// </summary>
         /// <param name="limit">Max length limit value.</param>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   HasLengthLess(this string value, int limit) => (value.Length < limit);
+        public static bool   HasLengthLess          (this string value, int limit) => (value.Length < limit);
 
         /// <summary>
         /// Checks if string has length less than custom min length limit value.
@@ -95,14 +107,14 @@ namespace ExtensionMethods
         /// </summary>
         /// <param name="limit">Max length limit value.</param>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   HasLengthMore(this string value, int limit) => (value.Length > limit);
+        public static bool   HasLengthMore          (this string value, int limit) => (value.Length > limit);
 
         /// <summary>
         /// Checks if string length is equal to custom value.
         /// </summary>
         /// <param name="number">Custom value.</param>
         /// <returns>Returns True if string length is equal to custom value.</returns>
-        public static bool   HasLengthEqual(this string value, int number)
+        public static bool   HasLengthEqual         (this string value, int number)
         {
             if (value.IsNull()) throw new NullReferenceException();
 
@@ -115,7 +127,7 @@ namespace ExtensionMethods
         /// </summary>
         /// <param name="min">Min length limit value.</param>
         /// <param name="max">Max length limit value.</param>
-        public static bool   HasLengthInRange    (this string value, int min, int max) => value.HasLengthMoreOrEqual(min) && value.HasLengthLessOrEqual(max);
+        public static bool   HasLengthInRange       (this string value, int min, int max) => value.HasLengthMoreOrEqual(min) && value.HasLengthLessOrEqual(max);
 
         /// <summary>
         /// Checks if string matches pattern. Returns True if string matches pattern, 
@@ -127,7 +139,7 @@ namespace ExtensionMethods
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public static bool   IsMatch             (this string value, string pattern, RegexOptions options = RegexOptions.Multiline)
+        public static bool   IsMatch                (this string value, string pattern, RegexOptions options = RegexOptions.Multiline)
         {
             if (value.IsNull()  ) throw new NullReferenceException();
             if (pattern.IsNull()) throw new ArgumentNullException (nameof(pattern));
@@ -149,7 +161,7 @@ namespace ExtensionMethods
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public static bool   IsNotMatch          (this string value, string pattern, RegexOptions options = RegexOptions.Multiline)
+        public static bool   IsNotMatch             (this string value, string pattern, RegexOptions options = RegexOptions.Multiline)
         {
             if (value.IsNull()  ) throw new NullReferenceException();
             if (pattern.IsNull()) throw new ArgumentNullException (nameof(pattern));
@@ -162,7 +174,7 @@ namespace ExtensionMethods
         /// the left side, or False, if it's not.
         /// </summary>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   IsTrimmedLeft       (this string value)
+        public static bool   IsTrimmedLeft          (this string value)
         {
             if (value.IsNull()) throw new NullReferenceException();
 
@@ -185,12 +197,12 @@ namespace ExtensionMethods
             return isTrimmedLeft;
         }
 
-        /// <summary>
+           /// <summary>
         /// Checks if string is trimmed from the right side. Returns True if string is trimmed from 
         /// the right side, or False, if it's not.
         /// </summary>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   IsTrimmedRight      (this string value)
+        public static bool   IsTrimmedRight         (this string value)
         {
             if (value.IsNull()) throw new NullReferenceException();
 
@@ -213,12 +225,12 @@ namespace ExtensionMethods
             return isTrimmedRight;
         }
 
-        /// <summary>
+           /// <summary>
         /// Checks if string trimmed from the left and right side. Returns True if string 
         /// is trimmed from both sides, or False if it's not.
         /// </summary>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   IsTrimmed           (this string value) => (value.IsTrimmedLeft() && value.IsTrimmedRight());
+        public static bool   IsTrimmed              (this string value) => (value.IsTrimmedLeft() && value.IsTrimmedRight());
 
         /// <summary>
         /// Checks if all letters that are present in the string have uppercase format. 
@@ -227,7 +239,7 @@ namespace ExtensionMethods
         /// Example: "ABC, 123!".HasLowercase() will return True.
         /// </summary>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   HasUppercase        (this string value)
+        public static bool   HasUppercase           (this string value)
         {
             if (value.IsNull()) { throw new NullReferenceException(nameof(value)); }
 
@@ -245,7 +257,7 @@ namespace ExtensionMethods
         /// Example: "abc, 123!".HasLowercase() will return True.
         /// </summary>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   HasLowercase        (this string value)
+        public static bool   HasLowercase           (this string value)
         {
             if (value.IsNull()) { throw new NullReferenceException(nameof(value)); }
 
@@ -264,7 +276,7 @@ namespace ExtensionMethods
         /// <param name="culture">Culture information that will be used to create 
         /// new string with title-case format.</param>
         /// <returns>The specified string converted to title case.</returns>
-        public static string ToTitleCase         (this string value, CultureInfo culture)
+        public static string ToTitleCase            (this string value, CultureInfo culture)
         {
             if (value   is null) throw new NullReferenceException(nameof(value  ));
             if (culture is null) throw new ArgumentNullException (nameof(culture));
@@ -278,53 +290,91 @@ namespace ExtensionMethods
         /// <param name="culture">Culture information that will be used to create 
         /// new string with title-case format.</param>
         /// <returns>Returns True if string has title case format.</returns>
-        public static bool   HasTitleCase         (this string value, CultureInfo culture)
+        public static bool   HasTitleCase           (this string value, CultureInfo culture)
         {
             if (value   is null) throw new NullReferenceException(nameof(value  ));
             if (culture is null) throw new ArgumentNullException (nameof(culture));
 
             return (value == value.ToTitleCase(culture));
         }
-                                                  
-        public static bool   SentenceCased        (this string value) => value.IsMatch(@"\A[\p{Lu}].*\z");              
-                                                  
-                                                  
-        public static bool   HasLetters           (this string value) => value.IsMatch(@"\p{L}" );
-        public static bool   HasMarks             (this string value) => value.IsMatch(@"\p{M}" );
-        public static bool   HasNumbers           (this string value) => value.IsMatch(@"\p{N}" );
-        public static bool   HasPunctuation       (this string value) => value.IsMatch(@"\p{P}" );
-        public static bool   HasSymbols           (this string value) => value.IsMatch(@"\p{S}" );
-        public static bool   HasSeparators        (this string value) => value.IsMatch(@"\p{Z}" );
-        public static bool   HasControls          (this string value) => value.IsMatch(@"\p{C}" );
-                                                  
-        public static bool   HasNoLetters         (this string value) => !value.HasLetters    ();
-        public static bool   HasNoMarks           (this string value) => !value.HasMarks      ();
-        public static bool   HasNoNumbers         (this string value) => !value.HasNumbers    ();
-        public static bool   HasNoPunctuation     (this string value) => !value.HasPunctuation();
-        public static bool   HasNoSymbols         (this string value) => !value.HasSymbols    ();
-        public static bool   HasNoSeparators      (this string value) => !value.HasSeparators ();
-        public static bool   HasNoControls        (this string value) => !value.HasControls   ();
-
-        public static bool   HasEnglishLetters    (this string value)
+                                                    
+        public static bool   SentenceCased          (this string value) => value.IsMatch(@"\A[\p{Lu}].*\z");              
+                                                                                                        
+        public static bool   HasLetters             (this string value) => value.IsMatch(@"\p{L}" );
+        public static bool   HasMarks               (this string value) => value.IsMatch(@"\p{M}" );
+        public static bool   HasNumbers             (this string value) => value.IsMatch(@"\p{N}" );
+        public static bool   HasPunctuation         (this string value) => value.IsMatch(@"\p{P}" );
+        public static bool   HasSymbols             (this string value) => value.IsMatch(@"\p{S}" );
+        public static bool   HasSeparators          (this string value) => value.IsMatch(@"\p{Z}" );
+        public static bool   HasControls            (this string value) => value.IsMatch(@"\p{C}" );
+                                                    
+        public static bool   HasNoLetters           (this string value) => !value.HasLetters    ();
+        public static bool   HasNoMarks             (this string value) => !value.HasMarks      ();
+        public static bool   HasNoNumbers           (this string value) => !value.HasNumbers    ();
+        public static bool   HasNoPunctuation       (this string value) => !value.HasPunctuation();
+        public static bool   HasNoSymbols           (this string value) => !value.HasSymbols    ();
+        public static bool   HasNoSeparators        (this string value) => !value.HasSeparators ();
+        public static bool   HasNoControls          (this string value) => !value.HasControls   ();
+        
+        /// <summary>
+        /// Checks if string contains English letters.
+        /// </summary>
+        /// <param name="value">String that should be checked.</param>
+        /// <returns>Returns, True if string contains English letters, or False if
+        /// doesn't.</returns>
+        public static bool   HasEnglishLetters      (this string value)
         {
             if (value.IsNull()) throw new NullReferenceException();
 
-            return value.IsMatch(@"[a-zA-Z]+");
+            return value.IsMatch($@"[{EnglishLetters}]+");
         }
-        public static bool   HasUkrainianLetters  (this string value)
+
+        /// <summary>
+        /// Checks if string contains Ukrainian letters.
+        /// </summary>
+        /// <param name="value">String that should be checked.</param>
+        /// <returns>Returns, True if string contains Ukrainian letters, or False if
+        /// doesn't.</returns>
+        public static bool   HasUkrainianLetters    (this string value)
         {
             if (value.IsNull()) throw new NullReferenceException();
 
-            return value.IsMatch(@"[абвгґдеєжзиіїйклмнопрстуфхцчшщьюяАБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ]");
+            return value.IsMatch($@"[{UkrainianLetters}]");
         }
 
-        public static bool   HasNoEnglishLetters  (this string value)
+        /// <summary>
+        /// Checks if string contains Russian letters.
+        /// </summary>
+        /// <param name="value">String that should be checked.</param>
+        /// <returns>Returns, True if string contains Russian letters, or False if
+        /// doesn't.</returns>
+        public static bool   HasRussianLetters      (this string value)
+        {
+            if (value.IsNull()) throw new ArgumentNullException(nameof(value));
+
+            return value.IsMatch($@"[{RussianLetters}]+");
+        }
+
+        /// <summary>
+        /// Checks if string doesn't contain English letters.
+        /// </summary>
+        /// <param name="value">String that should be checked.</param>
+        /// <returns>Returns, True if string doesn't contain English letters, or 
+        /// False if it does.</returns>
+        public static bool   HasNoEnglishLetters    (this string value)
         {
             if (value.IsNull()) throw new NullReferenceException();
 
             return !value.HasEnglishLetters();
         }
-        public static bool   HasNoUkrainianLetters(this string value)
+
+        /// <summary>
+        /// Checks if string doesn't contain Ukrainian letters.
+        /// </summary>
+        /// <param name="value">String that should be checked.</param>
+        /// <returns>Returns, True if string doesn't contain Ukrainian letters, or 
+        /// False if it does.</returns>
+        public static bool   HasNoUkrainianLetters  (this string value)
         {
             if (value.IsNull()) throw new NullReferenceException();
 
@@ -332,11 +382,22 @@ namespace ExtensionMethods
         }
 
         /// <summary>
+        /// Checks if string doesn't contain Russian letters.
+        /// </summary>
+        /// <param name="value">String that should be checked.</param>
+        /// <returns>Returns, True if string doesn't contain Russian letters, or 
+        /// False if it does.</returns>
+        public static bool   HasNoRussianLetters    (this string value)
+        {
+            return !value.HasRussianLetters();
+        }
+
+        /// <summary>
         /// Counts words in the string.
         /// </summary>
         /// <returns>Return number of words in the string.</returns>
         /// <exception cref="NullReferenceException"></exception>
-        public static int    WordCount           (this string value)
+        public static int    WordCount              (this string value)
         {
             if (value.IsNull()) { throw new NullReferenceException(nameof(value)); }
 
@@ -355,7 +416,7 @@ namespace ExtensionMethods
         /// <returns>Returns True if word count is less custom limit value, 
         /// if it's equal or more, returns False.</returns>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   HasWordCountLess    (this string value, int limit)
+        public static bool   HasWordCountLess       (this string value, int limit)
         {
             if (value.IsNull()) throw new NullReferenceException(nameof(value));
 
@@ -369,7 +430,7 @@ namespace ExtensionMethods
         /// <returns>Returns True if word count is more than custom limit value, 
         /// if it's equal or less, returns False.</returns>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   HasWordCountMore    (this string value, int limit)
+        public static bool   HasWordCountMore       (this string value, int limit)
         {
             if (value.IsNull()) throw new NullReferenceException(nameof(value));
 
@@ -411,7 +472,7 @@ namespace ExtensionMethods
         /// <returns>Returns True if word count is equal to custom limit value, 
         /// if it's not, returns False.</returns>
         /// <exception cref="NullReferenceException"></exception>
-        public static bool   HasWordCountEqual   (this string value, int limit)
+        public static bool   HasWordCountEqual      (this string value, int limit)
         {
             if (value.IsNull()) throw new NullReferenceException(nameof(value));
 
@@ -427,6 +488,6 @@ namespace ExtensionMethods
         /// </remarks>
         /// <param name="value">String that should be checked.</param>
         /// <returns>Escaped string.</returns>
-        public static string Escape              (this string value) => Regex.Replace(value, @"[*+?|{}\[\]()^$.#\\]", @"\$&", RegexOptions.Multiline);
+        public static string Escape                 (this string value) => Regex.Replace(value, @"[*+?|{}\[\]()^$.#\\]", @"\$&", RegexOptions.Multiline);
     }
 }
