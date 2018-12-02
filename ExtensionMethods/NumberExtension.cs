@@ -46,11 +46,21 @@ namespace ExtensionMethods
             return (number.CompareTo(limit) >= 0);
         }
 
-
+        /// <summary>
+        /// Checks if number is equal to specified value.
+        /// </summary>
+        /// <param name="limit">Numeric value.</param>
+        /// <returns>Returns True if number is equal to specified value.</returns>
         public static bool IsEqual      <T>(this T number, T value) where T : struct, IComparable, IComparable<T>, IConvertible, IEquatable<T>, IFormattable
         {
             return (number.CompareTo(value) == 0);
         }
+
+        /// <summary>
+        /// Checks if number is equal to specified value.
+        /// </summary>
+        /// <param name="limit">Numeric value.</param>
+        /// <returns>Returns True if number is equal to specified value.</returns>
         public static bool IsEqual      <T>(this T number, T value, params T[] values) where T : struct, IComparable, IComparable<T>, IConvertible, IEquatable<T>, IFormattable
         {
             var isEqual = false;
