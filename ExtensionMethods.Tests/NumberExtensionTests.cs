@@ -90,5 +90,20 @@ namespace Tests
         {
             return value.IsNotEqual(limit);
         }
+
+        #region TEST DATA
+        [TestCase( 1,  1, new int[] { 2, 3, 5 }, ExpectedResult = false)]
+        [TestCase( 2,  1, new int[] { 2, 3, 5 }, ExpectedResult = false)]
+        [TestCase( 3,  1, new int[] { 2, 3, 5 }, ExpectedResult = false)]
+        [TestCase( 5,  1, new int[] { 2, 3, 5 }, ExpectedResult = false)]
+        [TestCase( 0,  0, new int[] { 2, 3, 5 }, ExpectedResult = false)]
+        [TestCase(-1, -1, new int[] { 2, 3, 5 }, ExpectedResult = false)]
+        [TestCase(-2, -1, new int[] { 2, 3, 5 }, ExpectedResult = true )]
+        [TestCase( 6,  1, new int[] { 2, 3, 5 }, ExpectedResult = true )]
+        #endregion
+        public bool IsNotEqual(int value, int limit, params int[] values)
+        {
+            return value.IsNotEqual(limit, values);
+        }
     }
 }

@@ -93,6 +93,12 @@ namespace ExtensionMethods
         {
             return !number.IsEqual(value);
         }
+
+        /// <summary>
+        /// Checks if number is not equal to one of the specified values.
+        /// </summary>
+        /// <param name="limit">Numeric value.</param>
+        /// <returns>Returns True if number is not equal to one of the specified values.</returns>
         public static bool IsNotEqual   <T>(this T number, T value, params T[] values) where T : struct, IComparable, IComparable<T>, IConvertible, IEquatable<T>, IFormattable
         {
             return !number.IsEqual(value, values);
