@@ -78,5 +78,17 @@ namespace Tests
         {
             return value.IsEqual(limit, values);
         }
+
+        #region TEST DATA
+        [TestCase( 1,  1, ExpectedResult = false)]
+        [TestCase( 0,  0, ExpectedResult = false)]
+        [TestCase(-1, -1, ExpectedResult = false)]
+        [TestCase(-2, -1, ExpectedResult = true )]
+        [TestCase( 2,  1, ExpectedResult = true )]
+        #endregion
+        public bool IsNotEqual(int value, int limit)
+        {
+            return value.IsNotEqual(limit);
+        }
     }
 }
